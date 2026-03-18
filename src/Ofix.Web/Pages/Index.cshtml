@@ -1,0 +1,20 @@
+﻿@page
+@model Ofix.Web.Pages.IndexModel
+@using Ofix.Web.Menus
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Ofix.Localization
+@using Volo.Abp.Users
+@inject IPageLayout PageLayout
+@inject IHtmlLocalizer<OfixResource> L
+@inject ICurrentUser CurrentUser
+@{
+    PageLayout.Content.Title = L["Menu:Home"].Value;    
+    PageLayout.Content.BreadCrumb.ShowCurrent = false;
+    PageLayout.Content.ShowToolbar = false;
+    PageLayout.Content.MenuItemName = OfixMenus.Home;
+}
+
+@section styles {
+    <abp-style src="/Pages/Index.css" />
+}

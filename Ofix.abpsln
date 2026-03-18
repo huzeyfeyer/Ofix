@@ -1,0 +1,56 @@
+{
+  "id": "a18bd8b5-7757-48cb-b4a5-9eac843be59e",
+  "creationTime": "03/04/2026 14:02:49 +00:00",
+  "template": "app",
+  "versions": {
+    "AbpFramework": "10.1.0",
+    "AbpStudio": "2.2.1",
+    "TargetDotnetFramework": "net10.0"
+  },
+  "modules": {
+    "Ofix": {
+      "path": "Ofix.abpmdl"
+    }
+  },
+  "runProfiles": {
+    "Default": {
+      "path": "etc/abp-studio/run-profiles/Default.abprun.json"
+    }
+  },
+  "options": {
+    "httpRequests": {
+      "ignoredUrls": [
+      
+      ]
+    }
+  },
+  "creatingStudioConfiguration": {
+    "template": "app",
+    "createdAbpStudioVersion": "2.2.1",
+    "creationTool": "ABP Studio UI",
+    "tiered": "false",
+    "runInstallLibs": "",
+    "useLocalReferences": "false",
+    "multiTenancy": "false",
+    "includeTests": "true",
+    "kubernetesConfiguration": "false",
+    "uiFramework": "mvc",
+    "mobileFramework": "none",
+    "distributedEventBus": "none",
+    "databaseProvider": "ef",
+    "runDbMigrator": "",
+    "databaseManagementSystem": "sqlserver",
+    "separateTenantSchema": "false",
+    "createInitialMigration": "",
+    "theme": "basic",
+    "themeStyle": "",
+    "themeMenuPlacement": "",
+    "mobileFramework": "none",
+    "publicWebsite": "false",
+    "socialLogin": "false",
+    "sampleCrudPage": "true",
+    "selectedLanguages": ["Turkish", "Dutch", ],
+    "defaultLanguage": "Turkish",
+    "createCommand": "abp new Ofix -t app --ui-framework mvc --database-provider ef --database-management-system sqlserver --theme basic --skip-migration  --skip-migrator  --without-cms-kit --sample-crud-page --dont-run-install-libs --dont-run-bundling --no-multi-tenancy --no-social-logins -no-gdpr -no-openiddict-admin-ui -no-audit-logging -no-file-management -no-language-management -no-text-template-management"
+  }
+}

@@ -1,0 +1,24 @@
+<Solution>
+    <Configurations>
+        <Platform Name="Any CPU" />
+    </Configurations>
+    <Folder Name="/src/">
+        <Project Path="src/Ofix.Domain/Ofix.Domain.csproj" />
+        <Project Path="src/Ofix.Application/Ofix.Application.csproj" />
+        <Project Path="src/Ofix.EntityFrameworkCore/Ofix.EntityFrameworkCore.csproj" />
+        <Project Path="src/Ofix.Web/Ofix.Web.csproj" />
+        <Project Path="src/Ofix.Domain.Shared/Ofix.Domain.Shared.csproj" />
+        <Project Path="src/Ofix.Application.Contracts/Ofix.Application.Contracts.csproj" />
+        <Project Path="src/Ofix.HttpApi/Ofix.HttpApi.csproj" />
+        <Project Path="src/Ofix.HttpApi.Client/Ofix.HttpApi.Client.csproj" />
+        <Project Path="src/Ofix.DbMigrator/Ofix.DbMigrator.csproj" />
+    </Folder>
+    <Folder Name="/test/">
+        <Project Path="test/Ofix.Application.Tests/Ofix.Application.Tests.csproj" />
+        <Project Path="test/Ofix.Web.Tests/Ofix.Web.Tests.csproj" />
+        <Project Path="test/Ofix.EntityFrameworkCore.Tests/Ofix.EntityFrameworkCore.Tests.csproj" />
+        <Project Path="test/Ofix.TestBase/Ofix.TestBase.csproj" />
+        <Project Path="test/Ofix.Domain.Tests/Ofix.Domain.Tests.csproj" />
+        <Project Path="test/Ofix.HttpApi.Client.ConsoleTestApp/Ofix.HttpApi.Client.ConsoleTestApp.csproj" />
+    </Folder>
+</Solution>

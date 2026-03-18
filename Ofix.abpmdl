@@ -1,0 +1,108 @@
+{
+  "template": "app",
+  "imports": {
+    "Volo.Abp.BasicTheme": {
+      "version": "10.1.0",
+      "isInstalled": true,
+      "creationTime": "03/04/2026 14:02:49 +00:00"
+    },
+    "Volo.Abp.Account": {
+      "version": "10.1.0",
+      "isInstalled": true,
+      "creationTime": "03/04/2026 14:02:49 +00:00"
+    },
+    "Volo.Abp.OpenIddict": {
+      "version": "10.1.0",
+      "isInstalled": true,
+      "creationTime": "03/04/2026 14:02:49 +00:00"
+    },
+    "Volo.Abp.Identity": {
+      "version": "10.1.0",
+      "isInstalled": true,
+      "creationTime": "03/04/2026 14:02:49 +00:00"
+    },
+    "Volo.Abp.SettingManagement": {
+      "version": "10.1.0",
+      "isInstalled": true,
+      "creationTime": "03/04/2026 14:02:49 +00:00"
+    },
+    "Volo.Abp.PermissionManagement": {
+      "version": "10.1.0",
+      "isInstalled": true,
+      "creationTime": "03/04/2026 14:02:49 +00:00"
+    },
+    "Volo.Abp.FeatureManagement": {
+      "version": "10.1.0",
+      "isInstalled": true,
+      "creationTime": "03/04/2026 14:02:49 +00:00"
+    }
+  },
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "Ofix.Application": {
+      "path": "src/Ofix.Application/Ofix.Application.abppkg",
+      "folder": "src"
+    },
+    "Ofix.Application.Tests": {
+      "path": "test/Ofix.Application.Tests/Ofix.Application.Tests.abppkg",
+      "folder": "test"
+    },
+    "Ofix.Domain.Shared": {
+      "path": "src/Ofix.Domain.Shared/Ofix.Domain.Shared.abppkg",
+      "folder": "src"
+    },
+    "Ofix.Application.Contracts": {
+      "path": "src/Ofix.Application.Contracts/Ofix.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "Ofix.HttpApi": {
+      "path": "src/Ofix.HttpApi/Ofix.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "Ofix.HttpApi.Client": {
+      "path": "src/Ofix.HttpApi.Client/Ofix.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "Ofix.Web": {
+      "path": "src/Ofix.Web/Ofix.Web.abppkg",
+      "folder": "src"
+    },
+    "Ofix.Web.Tests": {
+      "path": "test/Ofix.Web.Tests/Ofix.Web.Tests.abppkg",
+      "folder": "test"
+    },
+    "Ofix.EntityFrameworkCore.Tests": {
+      "path": "test/Ofix.EntityFrameworkCore.Tests/Ofix.EntityFrameworkCore.Tests.abppkg",
+      "folder": "test"
+    },
+    "Ofix.EntityFrameworkCore": {
+      "path": "src/Ofix.EntityFrameworkCore/Ofix.EntityFrameworkCore.abppkg",
+      "folder": "src"
+    },
+    "Ofix.TestBase": {
+      "path": "test/Ofix.TestBase/Ofix.TestBase.abppkg",
+      "folder": "test"
+    },
+    "Ofix.Domain.Tests": {
+      "path": "test/Ofix.Domain.Tests/Ofix.Domain.Tests.abppkg",
+      "folder": "test"
+    },
+    "Ofix.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/Ofix.HttpApi.Client.ConsoleTestApp/Ofix.HttpApi.Client.ConsoleTestApp.abppkg",
+      "folder": "test"
+    },
+    "Ofix.DbMigrator": {
+      "path": "src/Ofix.DbMigrator/Ofix.DbMigrator.abppkg",
+      "folder": "src"
+    },
+    "Ofix.Domain": {
+      "path": "src/Ofix.Domain/Ofix.Domain.abppkg",
+      "folder": "src"
+    }
+  }
+}
