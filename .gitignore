@@ -272,3 +272,8 @@ src/Ofix.Blazor.Server.Tiered/Logs/*
 # IdentityServer temp files
 tempkey.rsa
 tempkey.jwk
+
+# Secrets
+**/appsettings.secrets.json
+**/appsettings.*.json
+!**/appsettings.json
