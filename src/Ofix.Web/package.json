@@ -5,7 +5,10 @@
 	"dependencies": {
 		"@abp/aspnetcore.mvc.ui.theme.basic": "~10.1.0"
 	},
-  "resolutions": {
-    "jquery": "3.7.1"
-  }
+	"resolutions": {
+		"jquery": "3.7.1"
+	},
+	"devDependencies": {
+		"eslint": "^10.1.0"
+	}
 }

@@ -1,0 +1,33 @@
+﻿@page
+@using Ofix.Localization
+@using Microsoft.Extensions.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@model Ofix.Web.Pages.Brands.EditModalModel
+@inject IStringLocalizer<OfixResource> L
+
+@{
+    Layout = null;
+}
+
+<abp-dynamic-form abp-model="Brand" asp-page="/Brands/EditModal">
+    <abp-modal>
+        <abp-modal-header title="@L["Edit"].Value"></abp-modal-header>
+        <abp-modal-body>
+            <abp-input asp-for="Id" />
+            <abp-form-content />
+            <div class="mb-3">
+                <label class="form-label">@L["CurrentLogo"]</label>
+                <div>
+                    <img id="CurrentLogoPreview" style="max-height:80px; display:none;" />
+                    <span id="NoLogoText">@L["NoLogo"]</span>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="LogoFile" class="form-label">@L["Logo"]</label>
+                <input type="file" id="EditLogoFile" name="LogoFile" class="form-control" accept="image/*" />
+            </div>
+        </abp-modal-body>
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel | AbpModalButtons.Save)"></abp-modal-footer>
+    </abp-modal>
+</abp-dynamic-form>

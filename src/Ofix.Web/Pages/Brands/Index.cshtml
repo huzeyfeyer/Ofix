@@ -1,0 +1,37 @@
+﻿@page
+@using Ofix.Localization
+@using Ofix.Permissions
+@using Ofix.Web.Pages.Brands
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.Extensions.Localization
+@model IndexModel
+@inject IStringLocalizer<OfixResource> L
+@inject IAuthorizationService AuthorizationService
+
+
+@section scripts
+
+{
+    <abp-script src="/Pages/Brands/Index.js" />
+}
+<abp-card>
+    <abp-card-header>
+        <abp-row>
+            <abp-column size-md="_6">
+                <abp-card-title>@L["Brands"]</abp-card-title>
+            </abp-column>
+            <abp-column size-md="_6" class="text-end">
+                @if (await AuthorizationService.IsGrantedAsync(OfixPermissions.Brands.Create))
+                {
+                    <abp-button id="NewBrandButton"
+                                text="@L["NewBrand"].Value"
+                                icon="plus"
+                                button-type="Primary" />
+                }
+            </abp-column>
+        </abp-row>
+    </abp-card-header>
+    <abp-card-body>
+        <abp-table striped-rows="true" id="BrandsTable"></abp-table>
+    </abp-card-body>
+</abp-card>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 
+
 namespace Ofix.Models
 {
         public class CreateUpdateModelDto
@@ -10,14 +11,14 @@ namespace Ofix.Models
             public Guid BrandId { get; set; }
 
             [Required]
-            [StringLength(128)]
+            [StringLength(ModelConsts.MaxNameLength)]
             public string Name { get; set; } = string.Empty;
 
             public int OrderNo { get; set; }
 
-            public bool Status { get; set; }
+            public ListingStatus ListingStatus { get; set; } = Models.ListingStatus.Draft;
 
-            [StringLength(256)]
+        [StringLength(ModelConsts.MaxNameLength)]
             public string Slug { get; set; } = string.Empty;
         }
     

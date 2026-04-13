@@ -98,12 +98,26 @@ public class OfixDbContext :
 
         builder.Entity<Brand>(b =>
         {
-            b.ToTable(OfixConsts.DbTablePrefix + "Brands",
-                OfixConsts.DbSchema);
-            b.ConfigureByConvention(); //auto configure for the base class props
-            b.Property(x => x.Name).IsRequired().HasMaxLength(128);
-            b.Property(x => x.Slug).HasMaxLength(256);
-            b.Property(x => x.Logo).HasMaxLength(512);
+            b.ToTable(OfixConsts.DbTablePrefix + "Brands", OfixConsts.DbSchema);
+
+            b.ConfigureByConvention();
+
+            b.Property(x => x.Name)
+                .IsRequired()
+                .HasMaxLength(BrandsConsts.MaxNameLength);
+
+            b.Property(x => x.Slug)
+                .IsRequired()
+                .HasMaxLength(256);
+
+            b.Property(x => x.LogoBlobName)
+                .HasMaxLength(256);
+
+            b.Property(x => x.LogoFileName)
+                .HasMaxLength(256);
+
+            b.Property(x => x.Status)
+                .IsRequired();
         });
 
         /* Configure Model entity */
@@ -115,7 +129,7 @@ public class OfixDbContext :
 
             b.ConfigureByConvention();
 
-            b.Property(x => x.Name).IsRequired().HasMaxLength(128);
+            b.Property(x => x.Name).IsRequired().HasMaxLength(ModelConsts.MaxNameLength);
 
             b.HasOne<Brand>()
              .WithMany()

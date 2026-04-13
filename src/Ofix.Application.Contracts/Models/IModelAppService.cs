@@ -8,7 +8,7 @@ namespace Ofix.Models
         ICrudAppService<
             ModelDto,
             Guid,
-            PagedAndSortedResultRequestDto,
+            ModelListInput,
             CreateUpdateModelDto>
     {
     }

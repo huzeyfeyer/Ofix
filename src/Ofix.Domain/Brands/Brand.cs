@@ -1,39 +1,20 @@
-﻿using System;
+﻿using Ofix.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Volo.Abp.Domain.Entities.Auditing;
 
 namespace Ofix.Brands
 {
-   public class Brand : FullAuditedAggregateRoot<Guid>
+    public class Brand : FullAuditedAggregateRoot<Guid>
     {
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         public int OrderNo { get; set; }
-        public bool Status { get; set; }
-        public string Logo { get; set; }
-        public string Slug { get; set; }
+        public ListingStatus Status { get; set; } = ListingStatus.Draft;
 
-        protected Brand()
-        {
-        }
-
-        public Brand(string name, int orderNo, bool status, string logo, string slug)
-        {
-            Name = name;
-            OrderNo = orderNo;
-            Status = status;
-            Logo = logo;
-            Slug = slug;
-        }
-
-        public Brand(Guid id, string name, int orderNo, bool status, string logo, string slug)
-            : base(id)
-        {
-            Name = name;
-            OrderNo = orderNo;
-            Status = status;
-            Logo = logo;
-            Slug = slug;
-        }
+        public string? LogoBlobName { get; set; }
+        public string? LogoFileName { get; set; }
+        public string Slug { get; set; } = string.Empty;
     }
+       
 }

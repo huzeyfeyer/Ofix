@@ -58,8 +58,16 @@ public class OfixMenuContributor : IMenuContributor
                 l["Menu:Books"],
                 url: "/Books"
                 ).RequirePermissions(OfixPermissions.Books.Default) 
-            )
+            ).AddItem(
+                new ApplicationMenuItem(
+                    "Ofix.Brands",
+                    l["Menu:Brands"],
+                    url: "/Brands"
+                ).RequirePermissions(OfixPermissions.Brands.Default)
+                )
         );
+
+
         
         return Task.CompletedTask;
     }

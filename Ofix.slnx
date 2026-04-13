@@ -1,7 +1,4 @@
 <Solution>
-    <Configurations>
-        <Platform Name="Any CPU" />
-    </Configurations>
     <Folder Name="/src/">
         <Project Path="src/Ofix.Domain/Ofix.Domain.csproj" />
         <Project Path="src/Ofix.Application/Ofix.Application.csproj" />

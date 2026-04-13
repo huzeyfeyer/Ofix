@@ -12,7 +12,24 @@ public static class OfixPermissions
         public const string Edit = Default + ".Edit";
         public const string Delete = Default + ".Delete";
     }
-    
+
+    public static class Brands
+    {
+        public const string Default = GroupName + ".Brands";
+        public const string Create = Default + ".Create";
+        public const string Edit = Default + ".Edit";
+        public const string Delete = Default + ".Delete";
+    }
+
+    public  static class Models
+    {
+        public const string Default = GroupName + ".Models";
+        public const string Create = Default + ".Create";
+        public const string Edit = Default + ".Edit";
+        public const string Delete = Default + ".Delete";
+    }
+
+
     //Add your own permission names. Example:
     //public const string MyPermission1 = GroupName + ".MyPermission1";
 }

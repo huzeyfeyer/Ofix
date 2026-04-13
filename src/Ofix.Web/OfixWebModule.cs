@@ -49,6 +49,10 @@ using Volo.Abp.OpenIddict;
 using Volo.Abp.Security.Claims;
 using Volo.Abp.SettingManagement.Web;
 using Volo.Abp.Studio.Client.AspNetCore;
+using Ofix.Files;
+using Volo.Abp.BlobStoring;
+using Volo.Abp.BlobStoring.FileSystem;
+
 
 namespace Ofix.Web;
 
@@ -63,7 +67,8 @@ namespace Ofix.Web;
     typeof(AbpAccountWebOpenIddictModule),
     typeof(AbpFeatureManagementWebModule),
     typeof(AbpSwashbuckleModule),
-    typeof(AbpAspNetCoreSerilogModule)
+    typeof(AbpAspNetCoreSerilogModule),
+    typeof(AbpBlobStoringFileSystemModule)
 )]
 public class OfixWebModule : AbpModule
 {
@@ -134,6 +139,21 @@ public class OfixWebModule : AbpModule
                 options.KnownProxies.Clear();
             });
         }
+
+        Configure<AbpBlobStoringOptions>(options =>
+        {
+            options.Containers.Configure<BrandImageContainer>(container =>
+            {
+                container.UseFileSystem(fileSystem =>
+                {
+                    fileSystem.BasePath = Path.Combine(
+                        hostingEnvironment.ContentRootPath,
+                        "blobs",
+                        "brand-images"
+                    );
+                });
+            });
+        });
 
         ConfigureStudio(hostingEnvironment);
         ConfigureBundles(hostingEnvironment);

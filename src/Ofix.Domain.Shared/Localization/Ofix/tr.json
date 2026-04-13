@@ -37,6 +37,30 @@
     "Unspecified": "Sistem",
     "SeeAllUsers": "Tüm Kullanıcıları Gör",
     "TakePhoto": "Fotoğraf Çek",
-    "ChoosePhoto": "Fotoğraf Seç"
+    "ChoosePhoto": "Fotoğraf Seç",
+    "NewBrand": "Yeni Marka",
+    "Name": "Marka",
+    "Status": "Durum",
+    "CreationTime": "Oluşturulma Zamanı",
+    "Enum:ListingStatus:Draft": "Taslak",
+    "Enum:ListingStatus:Published": "Yayında",
+    "Enum:ListingStatus:Reserved": "Rezerve",
+    "Enum:ListingStatus:Sold": "Satıldı",
+    "Enum:ListingStatus:Expired": "Süresi Doldu",
+    "Enum:ListingStatus:Passive": "Pasif",
+    "Menu:Ofix": "Kitap Mağazası",
+    "Menu:Books": "Kitaplar",
+    "Actions": "İşlemler",
+    "Close": "Kapat",
+    "Delete": "Sil",
+    "Edit": "Düzenle",
+    "PublishDate": "Yayın tarihi",
+    "NewBook": "Yeni kitap",
+    "Type": "Tür",
+    "Price": "Fiyat",
+    "AreYouSure": "Emin misiniz?",
+    "AreYouSureToDelete": "Bu öğeyi silmek istediğinizden emin misiniz?",
+    "BookDeletionConfirmationMessage": "'{0}' kitabını silmek istediğinize emin misiniz?"
+
   }
 }
