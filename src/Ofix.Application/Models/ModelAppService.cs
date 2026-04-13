@@ -76,10 +76,14 @@ namespace Ofix.Models;
     {
         var model = await _repository.GetAsync(id);
 
-        ObjectMapper.Map(input, model);
+        model.Name = input.Name;
+        model.OrderNo = input.OrderNo;
+        model.ListingStatus = input.ListingStatus;
+        model.BrandId = input.BrandId;
         model.Slug = GenerateSlug(input.Name);
 
-        await _repository.UpdateAsync(model);
+        await _repository.UpdateAsync(model, autoSave: true);
+
         return ObjectMapper.Map<Model, ModelDto>(model);
     }
 

@@ -47,6 +47,8 @@ public partial class OfixCreateUpdateBrandDtoToBrandMapper : MapperBase<CreateUp
 
 /* Mapper classes for Model entities */
 
+/* Mapper classes for Model entities */
+
 [Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
 public partial class OfixModelToModelDtoMapper : MapperBase<Model, ModelDto>
 {
@@ -61,6 +63,14 @@ public partial class OfixCreateUpdateModelDtoToModelMapper : MapperBase<CreateUp
     public override partial Model Map(CreateUpdateModelDto source);
 
     public override partial void Map(CreateUpdateModelDto source, Model destination);
+}
+
+[Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
+public partial class OfixModelDtoToCreateUpdateModelDtoMapper : MapperBase<ModelDto, CreateUpdateModelDto>
+{
+    public override partial CreateUpdateModelDto Map(ModelDto source);
+
+    public override partial void Map(ModelDto source, CreateUpdateModelDto destination);
 }
 
 

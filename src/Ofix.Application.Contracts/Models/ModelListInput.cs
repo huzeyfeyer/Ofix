@@ -8,7 +8,7 @@ namespace Ofix.Models
     public class ModelListInput : PagedAndSortedResultRequestDto
     {
         public Guid? BrandId { get; set; }
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public ListingStatus? ListingStatus { get; set; }
     }
 }

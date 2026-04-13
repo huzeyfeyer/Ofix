@@ -1,0 +1,31 @@
+﻿@page
+@using Ofix.Localization
+@using Microsoft.Extensions.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@model Ofix.Web.Pages.Models.CreateModalModel
+@inject IStringLocalizer<OfixResource> L
+
+@{
+    Layout = null;
+}
+
+<form method="post" asp-page="/Models/CreateModal">
+    <abp-modal>
+        <abp-modal-header title="@L["NewModel"].Value"></abp-modal-header>
+
+        <abp-modal-body>
+            <abp-select asp-for="Model.BrandId"
+                        asp-items="Model.Brands"
+                        label="@L["Menu:Brands"]">
+            </abp-select>
+
+            <abp-input asp-for="Model.Name"></abp-input>
+            <abp-input asp-for="Model.OrderNo"></abp-input>
+            <abp-select asp-for="Model.ListingStatus"></abp-select>
+         
+        </abp-modal-body>
+
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel | AbpModalButtons.Save)">
+        </abp-modal-footer>
+    </abp-modal>
+</form>

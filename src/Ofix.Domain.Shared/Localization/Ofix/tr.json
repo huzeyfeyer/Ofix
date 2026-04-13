@@ -6,12 +6,12 @@
     "Menu:ContactUs": "Bize Ulaşın",
     "Menu:ArticleSample": "Yazı Örneği",
     "Home": "Ana sayfa",
-    "Welcome": "Hoşgeldiniz",
-    "LongWelcomeMessage": "Uygulamaya hoşgeldiniz. Bu, ABP framework'ü üzerine bina edilmiş bir başlangıç projesidir. Daha fazla bilgi için ziyaret edebilirsiniz",
+    "Welcome": "Hoş geldiniz",
+    "LongWelcomeMessage": "Uygulamaya hoş geldiniz. Bu, ABP framework'ü üzerine inşa edilmiş bir başlangıç projesidir. Daha fazla bilgi için ziyaret edebilirsiniz",
     "Date": "Tarih",
     "Permission:Dashboard": "Genel görünüm",
     "Menu:Dashboard": "Genel görünüm",
-    "Menu:HomePage": "ana sayfa",
+    "Menu:HomePage": "Ana sayfa",
     "Dashboard": "Genel görünüm",
     "ExternalProvider:Google": "Google",
     "ExternalProvider:Google:ClientId": "Client ID",
@@ -60,7 +60,27 @@
     "Price": "Fiyat",
     "AreYouSure": "Emin misiniz?",
     "AreYouSureToDelete": "Bu öğeyi silmek istediğinizden emin misiniz?",
-    "BookDeletionConfirmationMessage": "'{0}' kitabını silmek istediğinize emin misiniz?"
+    "BookDeletionConfirmationMessage": "'{0}' kitabını silmek istediğinize emin misiniz?",
 
+    "NewModel": "Yeni model",
+    "Models": "Modeller",
+    "OrderNo": "Sıra numarası",
+    "Slug": "Slug",
+    "CreatedSuccessfully": "Başarıyla oluşturuldu",
+    "SavedSuccessfully": "Başarıyla kaydedildi",
+    "SuccessfullyDeleted": "Başarıyla silindi",
+
+    "Menu:Brands": "Markalar",
+    "Menu:Models": "Modeller",
+
+    "Permission:Brands": "Marka yönetimi",
+    "Permission:Brands.Create": "Yeni marka oluşturma",
+    "Permission:Brands.Edit": "Markaları düzenleme",
+    "Permission:Brands.Delete": "Markaları silme",
+
+    "Permission:Models": "Model yönetimi",
+    "Permission:Models.Create": "Yeni model oluşturma",
+    "Permission:Models.Edit": "Modelleri düzenleme",
+    "Permission:Models.Delete": "Modelleri silme"
   }
 }

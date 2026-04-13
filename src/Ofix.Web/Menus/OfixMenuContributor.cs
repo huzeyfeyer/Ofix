@@ -64,7 +64,13 @@ public class OfixMenuContributor : IMenuContributor
                     l["Menu:Brands"],
                     url: "/Brands"
                 ).RequirePermissions(OfixPermissions.Brands.Default)
-                )
+                ).AddItem(
+            new ApplicationMenuItem(
+                "Ofix.Models",
+                l["Menu:Models"],
+                url: "/Models"
+                ).RequirePermissions(OfixPermissions.Models.Default)
+            )
         );
 
 

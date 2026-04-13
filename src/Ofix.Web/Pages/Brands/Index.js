@@ -75,7 +75,18 @@
                     title: l('Status'),
                     data: "status",
                     render: function (data) {
-                        return l('Enum:ListingStatus:' + data);
+                        console.log("Brand status:", data);
+
+                        const map = {
+                            0: 'Draft',
+                            1: 'Active',
+                            2: 'Reserved',
+                            3: 'Sold',
+                            4: 'Expired',
+                            5: 'Passive'
+                        };
+
+                        return l('Enum:ListingStatus:' + map[data]);
                     }
                 },
                 {
