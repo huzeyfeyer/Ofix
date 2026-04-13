@@ -26,6 +26,11 @@ public class OfixPermissionDefinitionProvider : PermissionDefinitionProvider
         modelsPermission.AddChild(OfixPermissions.Models.Edit, L("Permission:Models.Edit"));
         modelsPermission.AddChild(OfixPermissions.Models.Delete, L("Permission:Models.Delete"));
 
+        var subModelsPermission = myGroup.AddPermission(OfixPermissions.SubModels.Default, L("Permission:SubModels"));
+        subModelsPermission.AddChild(OfixPermissions.SubModels.Create, L("Permission:Create"));
+        subModelsPermission.AddChild(OfixPermissions.SubModels.Edit, L("Permission:Edit"));
+        subModelsPermission.AddChild(OfixPermissions.SubModels.Delete, L("Permission:Delete"));
+
         //Define your own permissions here. Example:
         //myGroup.AddPermission(OfixPermissions.MyPermission1, L("Permission:MyPermission1"));
     }

@@ -143,12 +143,20 @@ public class OfixDbContext :
         builder.Entity<SubModel>(b =>
         {
             b.ToTable(OfixConsts.DbTablePrefix + "SubModels", OfixConsts.DbSchema);
+
             b.ConfigureByConvention();
-            b.Property(x => x.Name).IsRequired().HasMaxLength(128);
-            b.HasOne<Model>()
-             .WithMany()
-             .HasForeignKey(x => x.ModelId)
-             .OnDelete(DeleteBehavior.Restrict);
+
+            b.Property(x => x.Name)
+                .IsRequired()
+                .HasMaxLength(SubModelConsts.MaxNameLength);
+
+            b.Property(x => x.Slug)
+                .HasMaxLength(SubModelConsts.MaxSlugLength);
+
+            b.HasOne<Ofix.Models.Model>()
+                .WithMany()
+                .HasForeignKey(x => x.ModelId)
+                .OnDelete(DeleteBehavior.Restrict);
         });
 
         /* Configure FeatureCategory entity */

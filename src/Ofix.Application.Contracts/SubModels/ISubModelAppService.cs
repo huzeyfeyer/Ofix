@@ -8,7 +8,7 @@ namespace Ofix.SubModels
         ICrudAppService<
             SubModelDto,
             Guid,
-            PagedAndSortedResultRequestDto,
+            SubModelListInput,
             CreateUpdateSubModelDto>
     {
     }

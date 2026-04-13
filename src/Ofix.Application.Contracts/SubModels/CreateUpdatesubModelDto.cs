@@ -1,24 +1,25 @@
-﻿using System;
+﻿using Ofix.Models;
+using System;
 using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel.DataAnnotations;
+using System.Text;
 
 namespace Ofix.SubModels
 {
-        public class CreateUpdateSubModelDto
-        {
-            public Guid ModelId { get; set; }
+    public class CreateUpdateSubModelDto
+    {
+        public Guid ModelId { get; set; }
 
-            [Required]
-            [StringLength(128)]
-            public string Name { get; set; } = string.Empty;
+        [Required]
+        [StringLength(SubModelConsts.MaxNameLength)]
+        public string Name { get; set; } = string.Empty;
 
-            public int OrderNo { get; set; }
+        public int OrderNo { get; set; }
 
-            public bool Status { get; set; }
+        public ListingStatus ListingStatus { get; set; } = ListingStatus.Draft;
 
-            [StringLength(256)]
-            public string Slug { get; set; } = string.Empty;
-        }
-    
+        [StringLength(SubModelConsts.MaxSlugLength)]
+        public string Slug { get; set; } = string.Empty;
+    }
+
 }

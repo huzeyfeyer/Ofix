@@ -113,6 +113,16 @@
     "Permission:Models": "Beheer van modellen",
     "Permission:Models.Create": "Nieuwe modellen aanmaken",
     "Permission:Models.Edit": "Modellen bewerken",
-    "Permission:Models.Delete": "Modellen verwijderen"
+    "Permission:Models.Delete": "Modellen verwijderen",
+
+    
+    "Menu:SubModels": "Submodellen",
+    "SubModels": "Submodellen",
+    "SubModel": "Submodel",
+    "NewSubModel": "Nieuw submodel",
+    "EditSubModel": "Submodel bewerken",
+    "DeleteSubModelConfirmationMessage": "Ben je zeker dat je submodel '{0}' wilt verwijderen?",
+    "Permission:SubModels": "Submodellen"
+    
   }
 }

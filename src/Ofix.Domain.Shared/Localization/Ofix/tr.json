@@ -81,6 +81,15 @@
     "Permission:Models": "Model yönetimi",
     "Permission:Models.Create": "Yeni model oluşturma",
     "Permission:Models.Edit": "Modelleri düzenleme",
-    "Permission:Models.Delete": "Modelleri silme"
+    "Permission:Models.Delete": "Modelleri silme",
+
+    "Menu:SubModels": "Alt Modeller",
+    "SubModels": "Alt Modeller",
+    "SubModel": "Alt Model",
+    "NewSubModel": "Yeni alt model",
+    "EditSubModel": "Alt modeli düzenle",
+    "DeleteSubModelConfirmationMessage": "'{0}' alt modelini silmek istediğinizden emin misiniz?",
+    "Permission:SubModels": "Alt Modeller"
+
   }
 }
