@@ -42,12 +42,16 @@
     "Name": "Marka",
     "Status": "Durum",
     "CreationTime": "Oluşturulma Zamanı",
+
+
     "Enum:ListingStatus:Draft": "Taslak",
-    "Enum:ListingStatus:Published": "Yayında",
+    "Enum:ListingStatus:Active": "Aktif",
     "Enum:ListingStatus:Reserved": "Rezerve",
     "Enum:ListingStatus:Sold": "Satıldı",
-    "Enum:ListingStatus:Expired": "Süresi Doldu",
+    "Enum:ListingStatus:Expired": "Süresi doldu",
     "Enum:ListingStatus:Passive": "Pasif",
+
+
     "Menu:Ofix": "Kitap Mağazası",
     "Menu:Books": "Kitaplar",
     "Actions": "İşlemler",
@@ -89,7 +93,48 @@
     "NewSubModel": "Yeni alt model",
     "EditSubModel": "Alt modeli düzenle",
     "DeleteSubModelConfirmationMessage": "'{0}' alt modelini silmek istediğinizden emin misiniz?",
-    "Permission:SubModels": "Alt Modeller"
+
+    "Permission:SubModels": "Alt model yönetimi",
+    "Permission:SubModels.Create": "Yeni alt model oluşturma",
+    "Permission:SubModels.Edit": "Alt modelleri düzenleme",
+    "Permission:SubModels.Delete": "Alt modelleri silme",
+
+    "Menu:CarListings": "Araç İlanları",
+    "CarListings": "Araç İlanları",
+    "CarListing": "Araç İlanı",
+    "NewCarListing": "Yeni araç ilanı",
+    "EditCarListing": "Araç ilanını düzenle",
+
+    "Title": "Başlık",
+    "Year": "Yıl",
+    "Mileage": "Kilometre",
+    "Description": "Açıklama",
+    "Transmission": "Vites",
+    "FuelType": "Yakıt Türü",
+    "BodyShape": "Kasa Tipi",
+
+    "Permission:CarListings": "Araç ilanı yönetimi",
+    "Permission:CarListings.Create": "Yeni araç ilanı oluşturma",
+    "Permission:CarListings.Edit": "Araç ilanlarını düzenleme",
+    "Permission:CarListings.Delete": "Araç ilanlarını silme",
+
+    "Enum:TransmissionType:Manual": "Manuel",
+    "Enum:TransmissionType:Automatic": "Otomatik",
+    "Enum:TransmissionType:SemiAutomatic": "Yarı Otomatik",
+
+    "Enum:FuelType:Petrol": "Benzin",
+    "Enum:FuelType:Diesel": "Dizel",
+    "Enum:FuelType:Hybrid": "Hibrit",
+    "Enum:FuelType:Electric": "Elektrikli",
+    "Enum:FuelType:LPG": "LPG",
+
+    "Enum:BodyShapeType:Sedan": "Sedan",
+    "Enum:BodyShapeType:Hatchback": "Hatchback",
+    "Enum:BodyShapeType:SUV": "SUV",
+    "Enum:BodyShapeType:Coupe": "Coupe",
+    "Enum:BodyShapeType:Wagon": "Station Wagon"
+
+
 
   }
 }

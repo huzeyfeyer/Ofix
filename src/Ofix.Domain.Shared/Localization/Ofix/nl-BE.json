@@ -115,14 +115,49 @@
     "Permission:Models.Edit": "Modellen bewerken",
     "Permission:Models.Delete": "Modellen verwijderen",
 
-    
+
     "Menu:SubModels": "Submodellen",
     "SubModels": "Submodellen",
     "SubModel": "Submodel",
     "NewSubModel": "Nieuw submodel",
     "EditSubModel": "Submodel bewerken",
     "DeleteSubModelConfirmationMessage": "Ben je zeker dat je submodel '{0}' wilt verwijderen?",
-    "Permission:SubModels": "Submodellen"
-    
+    "Permission:SubModels": "Beheer van submodellen",
+
+    "Menu:CarListings": "Autoadvertenties",
+    "CarListings": "Autoadvertenties",
+    "CarListing": "Autoadvertentie",
+    "NewCarListing": "Nieuwe autoadvertentie",
+    "EditCarListing": "Autoadvertentie bewerken",
+
+    "Title": "Titel",
+    "Year": "Jaar",
+    "Mileage": "Kilometerstand",
+    "Description": "Beschrijving",
+    "Transmission": "Transmissie",
+    "FuelType": "Brandstoftype",
+    "BodyShape": "Carrosserievorm",
+
+    "Permission:CarListings": "Beheer van autoadvertenties",
+    "Permission:CarListings.Create": "Nieuwe autoadvertenties aanmaken",
+    "Permission:CarListings.Edit": "Autoadvertenties bewerken",
+    "Permission:CarListings.Delete": "Autoadvertenties verwijderen",
+
+    "Enum:TransmissionType:Manual": "Handgeschakeld",
+    "Enum:TransmissionType:Automatic": "Automaat",
+    "Enum:TransmissionType:SemiAutomatic": "Semi-automaat",
+
+    "Enum:FuelType:Petrol": "Benzine",
+    "Enum:FuelType:Diesel": "Diesel",
+    "Enum:FuelType:Hybrid": "Hybride",
+    "Enum:FuelType:Electric": "Elektrisch",
+    "Enum:FuelType:LPG": "LPG",
+
+    "Enum:BodyShapeType:Sedan": "Sedan",
+    "Enum:BodyShapeType:Hatchback": "Hatchback",
+    "Enum:BodyShapeType:SUV": "SUV",
+    "Enum:BodyShapeType:Coupe": "Coupé",
+    "Enum:BodyShapeType:Wagon": "Stationwagen"
+
   }
 }

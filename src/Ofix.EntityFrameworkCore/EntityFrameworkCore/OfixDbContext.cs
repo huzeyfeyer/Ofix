@@ -1,6 +1,12 @@
 using Microsoft.EntityFrameworkCore;
-using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Ofix.Books;
+using Ofix.Brands;
+using Ofix.CarListings;
+using Ofix.FeatureCategories;
+using Ofix.Features;
+using Ofix.Models;
+using Ofix.SubModels;
+using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.BlobStoring.Database.EntityFrameworkCore;
 using Volo.Abp.Data;
@@ -10,14 +16,9 @@ using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity;
 using Volo.Abp.Identity.EntityFrameworkCore;
+using Volo.Abp.OpenIddict.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
-using Volo.Abp.OpenIddict.EntityFrameworkCore;
-using Ofix.Brands;
-using Ofix.Models;
-using Ofix.SubModels;
-using Ofix.FeatureCategories;
-using Ofix.Features;
 
 
 namespace Ofix.EntityFrameworkCore;
@@ -36,6 +37,7 @@ public class OfixDbContext :
     public DbSet<SubModel> SubModels { get; set; }
     public DbSet<FeatureCategory> FeatureCategories  { get; set; }
     public DbSet<Feature> Features { get; set; }
+    public DbSet<CarListing> CarListings { get; set; }
 
 
     #region Entities from the modules
@@ -159,6 +161,28 @@ public class OfixDbContext :
                 .OnDelete(DeleteBehavior.Restrict);
         });
 
+        /* Configure SubModel entity */
+
+        builder.Entity<CarListing>(b =>
+        {
+            b.ToTable(OfixConsts.DbTablePrefix + "CarListings", OfixConsts.DbSchema);
+
+            b.ConfigureByConvention();
+
+            b.Property(x => x.Title)
+                .IsRequired()
+                .HasMaxLength(256);
+
+            b.Property(x => x.Description)
+                .HasMaxLength(2000);
+
+            b.HasOne<SubModel>()
+                .WithMany()
+                .HasForeignKey(x => x.SubModelId)
+                .OnDelete(DeleteBehavior.Restrict);
+        });
+
+
         /* Configure FeatureCategory entity */
 
         builder.Entity<FeatureCategory>(b =>
@@ -188,6 +212,8 @@ public class OfixDbContext :
              .HasForeignKey(x => x.FeatureCategoryId)
              .OnDelete(DeleteBehavior.Restrict);
         });
+
+
 
         /* Configure your own tables/entities inside here */
 

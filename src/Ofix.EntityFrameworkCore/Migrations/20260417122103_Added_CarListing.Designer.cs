@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Ofix.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
@@ -12,9 +13,11 @@ using Volo.Abp.EntityFrameworkCore;
 namespace Ofix.Migrations
 {
     [DbContext(typeof(OfixDbContext))]
-    partial class OfixDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260417122103_Added_CarListing")]
+    partial class Added_CarListing
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -184,8 +187,7 @@ namespace Ofix.Migrations
                         .HasColumnName("DeletionTime");
 
                     b.Property<string>("Description")
-                        .HasMaxLength(2000)
-                        .HasColumnType("nvarchar(2000)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ExtraProperties")
                         .IsRequired()
@@ -223,8 +225,7 @@ namespace Ofix.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Transmission")
                         .HasColumnType("int");
@@ -234,9 +235,7 @@ namespace Ofix.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SubModelId");
-
-                    b.ToTable("AppCarListings", (string)null);
+                    b.ToTable("CarListings");
                 });
 
             modelBuilder.Entity("Ofix.FeatureCategories.FeatureCategory", b =>
@@ -2389,15 +2388,6 @@ namespace Ofix.Migrations
                         .IsUnique();
 
                     b.ToTable("AbpSettingDefinitions", (string)null);
-                });
-
-            modelBuilder.Entity("Ofix.CarListings.CarListing", b =>
-                {
-                    b.HasOne("Ofix.SubModels.SubModel", null)
-                        .WithMany()
-                        .HasForeignKey("SubModelId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Ofix.Features.Feature", b =>

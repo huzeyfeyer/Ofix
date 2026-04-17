@@ -1,9 +1,10 @@
 using Ofix.Books;
 using Ofix.Brands;
-using Ofix.Models;
-using Ofix.SubModels;
+using Ofix.CarListings;
 using Ofix.FeatureCategories;
 using Ofix.Features;
+using Ofix.Models;
+using Ofix.SubModels;
 using Riok.Mapperly.Abstractions;
 using Volo.Abp.Mapperly;
 
@@ -99,6 +100,33 @@ public partial class OfixSubModelDtoToCreateUpdateSubModelDtoMapper : MapperBase
 
     public override partial void Map(SubModelDto source, CreateUpdateSubModelDto destination);
 }
+
+/* Mapper classes for CarListing entities */
+
+[Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
+public partial class OfixCarListingToCarListingDtoMapper : MapperBase<CarListing, CarListingDto>
+{
+    public override partial CarListingDto Map(CarListing source);
+
+    public override partial void Map(CarListing source, CarListingDto destination);
+}
+
+[Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
+public partial class OfixCreateUpdateCarListingDtoToCarListingMapper : MapperBase<CreateUpdateCarListingDto, CarListing>
+{
+    public override partial CarListing Map(CreateUpdateCarListingDto source);
+
+    public override partial void Map(CreateUpdateCarListingDto source, CarListing destination);
+}
+
+[Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Target)]
+public partial class OfixCarListingDtoToCreateUpdateCarListingDtoMapper : MapperBase<CarListingDto, CreateUpdateCarListingDto>
+{
+    public override partial CreateUpdateCarListingDto Map(CarListingDto source);
+
+    public override partial void Map(CarListingDto source, CreateUpdateCarListingDto destination);
+}
+
 
 
 /* Mapper classes for FeatureCategory entities */
