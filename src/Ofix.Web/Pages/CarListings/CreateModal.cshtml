@@ -1,0 +1,45 @@
+﻿@page
+@using Ofix.Localization
+@using Microsoft.Extensions.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@model Ofix.Web.Pages.CarListings.CreateModalModel
+@inject IStringLocalizer<OfixResource> L
+
+@{
+    Layout = null;
+}
+
+<form method="post" asp-page="/CarListings/CreateModal">
+    <abp-modal>
+        <abp-modal-header title="@L["NewCarListing"]"></abp-modal-header>
+
+        <abp-modal-body>
+
+    
+            <abp-select asp-for="CarListing.SubModelId" asp-items="Model.SubModels" label="@L["SubModel"].Value"></abp-select>
+
+            
+            <abp-input asp-for="CarListing.Title"></abp-input>
+
+            <abp-input asp-for="CarListing.Price"></abp-input>
+
+            <abp-input asp-for="CarListing.Year"></abp-input>
+
+            <abp-input asp-for="CarListing.Mileage"></abp-input>
+
+            <abp-select asp-for="CarListing.ListingStatus"></abp-select>
+
+            <abp-select asp-for="CarListing.Transmission"></abp-select>
+
+            <abp-select asp-for="CarListing.FuelType"></abp-select>
+
+            <abp-select asp-for="CarListing.BodyShape"></abp-select>
+
+            <abp-input asp-for="CarListing.Description"></abp-input>
+
+        </abp-modal-body>
+
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel | AbpModalButtons.Save)">
+        </abp-modal-footer>
+    </abp-modal>
+</form>

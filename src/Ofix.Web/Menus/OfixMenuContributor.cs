@@ -76,6 +76,12 @@ public class OfixMenuContributor : IMenuContributor
                 l["Menu:SubModels"],
                 url: "/SubModels"
                 ).RequirePermissions(OfixPermissions.SubModels.Default)
+            ).AddItem(
+            new ApplicationMenuItem(
+                "Ofix.CarListings",
+                l["Menu:CarListings"],
+                url: "/CarListings"
+                ).RequirePermissions(OfixPermissions.CarListings.Default)
             )
         );
 
