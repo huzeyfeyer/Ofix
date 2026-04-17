@@ -1,0 +1,32 @@
+﻿@page
+@using Ofix.Localization
+@using Microsoft.Extensions.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@model Ofix.Web.Pages.SubModels.EditModalModel
+@inject IStringLocalizer<OfixResource> L
+
+@{
+    Layout = null;
+}
+
+<form method="post" asp-page="/SubModels/EditModal">
+    <abp-modal>
+        <abp-modal-header title="@L["Edit"].Value"></abp-modal-header>
+
+        <abp-modal-body>
+            <abp-input asp-for="Id" type="hidden" />
+
+            <abp-select asp-for="SubModel.ModelId"
+                        asp-items="Model.Models"
+                        label="Model">
+            </abp-select>
+
+            <abp-input asp-for="SubModel.Name"></abp-input>
+            <abp-input asp-for="SubModel.OrderNo"></abp-input>
+            <abp-select asp-for="SubModel.ListingStatus"></abp-select>
+        </abp-modal-body>
+
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel | AbpModalButtons.Save)">
+        </abp-modal-footer>
+    </abp-modal>
+</form>
