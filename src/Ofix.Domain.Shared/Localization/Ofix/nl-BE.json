@@ -157,7 +157,12 @@
     "Enum:BodyShapeType:Hatchback": "Hatchback",
     "Enum:BodyShapeType:SUV": "SUV",
     "Enum:BodyShapeType:Coupe": "Coupé",
-    "Enum:BodyShapeType:Wagon": "Stationwagen"
+    "Enum:BodyShapeType:Wagon": "Stationwagen",
+
+    "SelectBrand": "Selecteer een merk",
+    "SelectBrandFirst": "Selecteer eerst een merk",
+    "SelectModel": "Selecteer een model",
+    "Brand": "Merk"
 
   }
 }

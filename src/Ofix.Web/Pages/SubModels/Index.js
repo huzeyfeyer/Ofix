@@ -82,8 +82,14 @@
         })
     );
 
+    var createModal = new abp.ModalManager({
+        viewUrl: abp.appPath + 'SubModels/CreateModal',
+        scriptUrl: abp.appPath + 'Pages/SubModels/CreateModal.js',
+        modalClass: 'SubModelCreate'
+    });
+
     createModal.onResult(function () {
-        abp.notify.success(l('CreatedSuccessfully'));
+        abp.notify.success(l('SuccessfullyCreated'));
         dataTable.ajax.reload();
     });
 

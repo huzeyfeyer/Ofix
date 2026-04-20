@@ -132,7 +132,12 @@
     "Enum:BodyShapeType:Hatchback": "Hatchback",
     "Enum:BodyShapeType:SUV": "SUV",
     "Enum:BodyShapeType:Coupe": "Coupe",
-    "Enum:BodyShapeType:Wagon": "Station Wagon"
+    "Enum:BodyShapeType:Wagon": "Station Wagon",
+
+    "SelectBrand": "Bir marka seçin",
+    "SelectBrandFirst": "Önce bir marka seçin",
+    "SelectModel": "Bir model seçin",
+    "Brand": "Marka"
 
 
 

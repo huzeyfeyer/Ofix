@@ -14,6 +14,16 @@
         <abp-modal-header title="@L["NewSubModel"].Value"></abp-modal-header>
 
         <abp-modal-body>
+
+            <input type="hidden" id="SubModelLocalization_SelectBrand" value="@L["SelectBrand"].Value" />
+            <input type="hidden" id="SubModelLocalization_SelectBrandFirst" value="@L["SelectBrandFirst"].Value" />
+            <input type="hidden" id="SubModelLocalization_SelectModel" value="@L["SelectModel"].Value" />
+
+            <abp-select asp-for="BrandId"
+                        asp-items="Model.Brands"
+                        label="Brand">
+            </abp-select>
+
             <abp-select asp-for="SubModel.ModelId"
                         asp-items="Model.Models"
                         label="Model">
