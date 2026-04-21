@@ -1,6 +1,5 @@
 ﻿$(function () {
     var l = abp.localization.getResource('Ofix');
-    var createModal = new abp.ModalManager(abp.appPath + 'CarListings/CreateModal');
     var editModal = new abp.ModalManager(abp.appPath + 'CarListings/EditModal');
 
     var dataTable = $('#CarListingsTable').DataTable(
@@ -47,7 +46,18 @@
                 },
                 {
                     title: l('Title'),
-                    data: "title"
+                    data: "title",
+                    render: function (data) {
+                        if (!data) {
+                            return '';
+                        }
+
+                        if (data.length > 35) {
+                            return data.substring(0, 35) + '...';
+                        }
+
+                        return data;
+                    }
                 },
                 {
                     title: l('SubModel'),
@@ -99,7 +109,7 @@
                     data: "fuelType",
                     render: function (data) {
                         const map = {
-                            0: 'Gasoline',
+                            0: 'Petrol',
                             1: 'Diesel',
                             2: 'LPG',
                             3: 'Hybrid',
@@ -133,10 +143,7 @@
         })
     );
 
-    createModal.onResult(function () {
-        abp.notify.success(l('CreatedSuccessfully'));
-        dataTable.ajax.reload();
-    });
+  
 
     editModal.onResult(function () {
         abp.notify.success(l('SavedSuccessfully'));
@@ -145,6 +152,6 @@
 
     $('#NewCarListingButton').click(function (e) {
         e.preventDefault();
-        createModal.open();
+        window.location.href = abp.appPath + 'CarListings/Create';
     });
 });

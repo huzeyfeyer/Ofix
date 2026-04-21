@@ -6,10 +6,10 @@ namespace Ofix.CarListings
 {
     public enum FuelType
     {
-        Petrol = 1,
-        Diesel = 2,
-        Hybrid = 3,
-        Electric = 4,
-        LPG = 5
+        Petrol = 0,
+        Diesel = 1,
+        Hybrid = 2,
+        Electric = 3,
+        LPG = 4
     }
 }

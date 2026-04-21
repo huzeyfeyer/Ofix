@@ -6,8 +6,8 @@ namespace Ofix.CarListings
 {
     public enum TransmissionType
     {
-        Manual = 1,
-        Automatic = 2,
-        SemiAutomatic = 3
+        Manual = 0,
+        Automatic = 1,
+        SemiAutomatic = 2
     }
 }

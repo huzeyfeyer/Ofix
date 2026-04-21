@@ -162,7 +162,20 @@
     "SelectBrand": "Selecteer een merk",
     "SelectBrandFirst": "Selecteer eerst een merk",
     "SelectModel": "Selecteer een model",
-    "Brand": "Merk"
+    "Brand": "Merk",
+
+    "Model": "Model",
+    "VehicleInformation": "Voertuiginformatie",
+    "TechnicalInformation": "Technische informatie",
+    "ListingInformation": "Advertentie-informatie",
+    "Photos": "Foto's",
+    "PhotoUploadWillBeAddedLater": "Het foto-uploadgedeelte wordt later toegevoegd.",
+    "SelectSubModel": "Selecteer een submodel",
+    "SelectYear": "Selecteer een jaar",
+    "SelectListingStatus": "Selecteer een advertentiestatus",
+    "SelectTransmission": "Selecteer een transmissie",
+    "SelectFuelType": "Selecteer een brandstoftype",
+    "SelectBodyShape": "Selecteer een carrosserievorm"
 
   }
 }

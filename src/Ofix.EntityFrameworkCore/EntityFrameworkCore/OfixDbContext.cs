@@ -169,14 +169,22 @@ public class OfixDbContext :
 
             b.ConfigureByConvention();
 
-            b.Property(x => x.Title)
-                .IsRequired()
-                .HasMaxLength(256);
+            b.Property(x => x.Title).IsRequired().HasMaxLength(200);
+            b.Property(x => x.Price).IsRequired();
+            b.Property(x => x.Year).IsRequired();
+            b.Property(x => x.Mileage).IsRequired();
 
-            b.Property(x => x.Description)
-                .HasMaxLength(2000);
+            b.HasOne(x => x.Brand)
+                .WithMany()
+                .HasForeignKey(x => x.BrandId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            b.HasOne<SubModel>()
+            b.HasOne(x => x.Model)
+                .WithMany()
+                .HasForeignKey(x => x.ModelId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            b.HasOne(x => x.SubModel)
                 .WithMany()
                 .HasForeignKey(x => x.SubModelId)
                 .OnDelete(DeleteBehavior.Restrict);

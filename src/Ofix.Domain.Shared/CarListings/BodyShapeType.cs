@@ -6,10 +6,10 @@ namespace Ofix.CarListings
 {
     public enum BodyShapeType
     {
-        Sedan = 1,
-        Hatchback = 2,
-        SUV = 3,
-        Coupe = 4,
-        Wagon = 5
+        Sedan = 0,
+        Hatchback = 1,
+        SUV = 2,
+        Coupe = 3,
+        Wagon = 4
     }
 }

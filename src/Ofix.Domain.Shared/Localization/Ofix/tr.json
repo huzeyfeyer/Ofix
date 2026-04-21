@@ -137,7 +137,22 @@
     "SelectBrand": "Bir marka seçin",
     "SelectBrandFirst": "Önce bir marka seçin",
     "SelectModel": "Bir model seçin",
-    "Brand": "Marka"
+    "Brand": "Marka",
+
+    "Save": "Kaydet",
+    "Cancel": "İptal",
+    "Model": "Model",
+    "VehicleInformation": "Araç Bilgileri",
+    "TechnicalInformation": "Teknik Bilgiler",
+    "ListingInformation": "İlan Bilgileri",
+    "Photos": "Fotoğraflar",
+    "PhotoUploadWillBeAddedLater": "Fotoğraf yükleme alanı daha sonra eklenecek.",
+    "SelectSubModel": "Bir alt model seçin",
+    "SelectYear": "Yıl seçin",
+    "SelectListingStatus": "İlan durumu seçin",
+    "SelectTransmission": "Vites türü seçin",
+    "SelectFuelType": "Yakıt türü seçin",
+    "SelectBodyShape": "Kasa tipi seçin"
 
 
 

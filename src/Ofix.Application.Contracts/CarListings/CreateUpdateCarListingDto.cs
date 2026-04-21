@@ -1,30 +1,47 @@
 ﻿using Ofix.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Ofix.CarListings
 {
     public class CreateUpdateCarListingDto
     {
-        public Guid SubModelId { get; set; }
+        [Required]
+        public Guid? BrandId { get; set; }
 
-        public string Title { get; set; } = string.Empty;
+        [Required]
+        public Guid? ModelId { get; set; }
 
+        [Required]
+        public Guid? SubModelId { get; set; }
+
+        [StringLength(200)]
+        public string Title { get; set; }
+
+        [Range(typeof(decimal), "1", "999999999")]
         public decimal Price { get; set; }
 
+        [Range(CarListingConsts.MinYear, 2100)]
         public int Year { get; set; }
 
+        [Range(CarListingConsts.MinMileage, CarListingConsts.MaxMileage)]
         public int Mileage { get; set; }
 
-        public ListingStatus ListingStatus { get; set; } = ListingStatus.Draft;
+        [Required]
+        public ListingStatus? ListingStatus { get; set; }
 
-        public string? Description { get; set; }
+        [Required]
+        public TransmissionType? Transmission { get; set; }
 
-        public TransmissionType Transmission { get; set; }
+        [Required]
+        public FuelType? FuelType { get; set; }
 
-        public FuelType FuelType { get; set; }
+        [Required]
+        public BodyShapeType? BodyShape { get; set; }
 
-        public BodyShapeType BodyShape { get; set; }
+        [StringLength(2000)]
+        public string Description { get; set; }
     }
 }
