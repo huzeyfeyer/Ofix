@@ -153,6 +153,7 @@ namespace Ofix.CarListings
                 Transmission = carListing.Transmission,
                 FuelType = carListing.FuelType,
                 BodyShape = carListing.BodyShape,
+                Description = carListing.Description,
                 CreationTime = carListing.CreationTime
             };
         }

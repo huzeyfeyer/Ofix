@@ -28,8 +28,20 @@ namespace Ofix.Web.Pages.CarListings
         public List<SelectListItem> FuelTypes { get; set; } = new();
         public List<SelectListItem> BodyShapes { get; set; } = new();
 
-        public string CurrencySymbol =>
-            CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "tr" ? "₺" : "€";
+        public string CurrencySymbol => GetCurrencySymbol();
+
+        private string GetCurrencySymbol()
+        {
+            var language = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+
+            return language switch
+            {
+                "tr" => "₺",
+                "nl" => "€"
+
+            };
+        }
+
 
         private readonly ICarListingAppService _carListingAppService;
         private readonly IBrandAppService _brandAppService;

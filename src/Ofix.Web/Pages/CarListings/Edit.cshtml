@@ -1,4 +1,127 @@
 ﻿@page
+@using Microsoft.Extensions.Localization
+@using Ofix.Localization
+@using System.Globalization
 @model Ofix.Web.Pages.CarListings.EditModel
-@{
+@inject IStringLocalizer<OfixResource> L
+
+@section scripts
+{
+    <abp-script src="/Pages/CarListings/Edit.js" />
 }
+
+<input type="hidden" id="CarListingLocalization_SelectModel" value="@L["SelectModel"].Value" />
+<input type="hidden" id="CarListingLocalization_SelectSubModel" value="@L["SelectSubModel"].Value" />
+
+<form method="post" id="CarListingEditForm">
+    <div class="card">
+        <div class="card-header">
+            <h4>@L["EditCarListing"]</h4>
+        </div>
+
+        <div class="card-body">
+            <ul class="nav nav-tabs" id="carListingTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="vehicle-tab" data-bs-toggle="tab" data-bs-target="#vehicle" type="button">
+                        @L["VehicleInformation"]
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="technical-tab" data-bs-toggle="tab" data-bs-target="#technical" type="button">
+                        @L["TechnicalInformation"]
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="listing-tab" data-bs-toggle="tab" data-bs-target="#listing" type="button">
+                        @L["ListingInformation"]
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="photos-tab" data-bs-toggle="tab" data-bs-target="#photos" type="button">
+                        @L["Photos"]
+                    </button>
+                </li>
+            </ul>
+
+            <div class="tab-content pt-3" id="carListingTabsContent">
+                <div class="tab-pane fade show active" id="vehicle" role="tabpanel">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <abp-select asp-for="CarListing.BrandId" asp-items="Model.Brands" label="@L["Brand"]"></abp-select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <abp-select asp-for="CarListing.ModelId" asp-items="Model.Models" label="@L["Model"]"></abp-select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <abp-select asp-for="CarListing.SubModelId" asp-items="Model.SubModels" label="@L["SubModel"]"></abp-select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <abp-input asp-for="CarListing.Title" label="@L["Title"]"></abp-input>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="technical" role="tabpanel">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <abp-select asp-for="CarListing.Year" asp-items="Model.Years" label="@L["Year"]"></abp-select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="CarListing.Mileage" class="form-label">@L["Mileage"]</label>
+                            <input asp-for="CarListing.Mileage" id="CarListing_Mileage" class="form-control js-number-format" inputmode="numeric" autocomplete="off" />
+                            <span asp-validation-for="CarListing.Mileage" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <abp-select asp-for="CarListing.Transmission" asp-items="Model.Transmissions" label="@L["Transmission"]"></abp-select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <abp-select asp-for="CarListing.FuelType" asp-items="Model.FuelTypes" label="@L["FuelType"]"></abp-select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <abp-select asp-for="CarListing.BodyShape" asp-items="Model.BodyShapes" label="@L["BodyShape"]"></abp-select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="listing" role="tabpanel">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label asp-for="CarListing.Price" class="form-label">@L["Price"]</label>
+                            <div class="input-group">
+                                <span class="input-group-text">@Model.CurrencySymbol</span>
+                                <input asp-for="CarListing.Price" id="CarListing_Price" class="form-control js-number-format" inputmode="numeric" autocomplete="off" />
+                            </div>
+                            <span asp-validation-for="CarListing.Price" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <abp-select asp-for="CarListing.ListingStatus" asp-items="Model.ListingStatuses" label="@L["ListingStatus"]"></abp-select>
+                        </div>
+
+                        <div class="col-md-12">
+                            <abp-input asp-for="CarListing.Description" label="@L["Description"]"></abp-input>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="photos" role="tabpanel">
+                    <div class="border rounded p-4 text-center text-muted">
+                        @L["PhotoUploadWillBeAddedLater"]
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer text-end">
+            <a asp-page="/CarListings/Index" class="btn btn-secondary">@L["Cancel"]</a>
+            <button type="submit" class="btn btn-primary">@L["Save"]</button>
+        </div>
+    </div>
+</form>

@@ -1,6 +1,5 @@
 ﻿$(function () {
     var l = abp.localization.getResource('Ofix');
-    var editModal = new abp.ModalManager(abp.appPath + 'CarListings/EditModal');
 
     var dataTable = $('#CarListingsTable').DataTable(
         abp.libs.datatables.normalizeConfiguration({
@@ -19,7 +18,7 @@
                                 text: l('Edit'),
                                 visible: abp.auth.isGranted('Ofix.CarListings.Edit'),
                                 action: function (data) {
-                                    editModal.open({ id: data.record.id });
+                                    window.location.href = abp.appPath + 'CarListings/Edit?id=' + data.record.id;
                                 }
                             },
                             {
@@ -145,10 +144,7 @@
 
   
 
-    editModal.onResult(function () {
-        abp.notify.success(l('SavedSuccessfully'));
-        dataTable.ajax.reload();
-    });
+    
 
     $('#NewCarListingButton').click(function (e) {
         e.preventDefault();

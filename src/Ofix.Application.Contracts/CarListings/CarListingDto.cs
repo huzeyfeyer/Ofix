@@ -26,5 +26,6 @@ namespace Ofix.CarListings
         public FuelType FuelType { get; set; }
         public BodyShapeType BodyShape { get; set; }
         public DateTime CreationTime { get; set; }
+        public string Description { get; set; } = string.Empty;
     }
 }
