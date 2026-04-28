@@ -175,7 +175,12 @@
     "SelectListingStatus": "Selecteer een advertentiestatus",
     "SelectTransmission": "Selecteer een transmissie",
     "SelectFuelType": "Selecteer een brandstoftype",
-    "SelectBodyShape": "Selecteer een carrosserievorm"
+    "SelectBodyShape": "Selecteer een carrosserievorm",
+
+    "Permission:CarListingImages": "Advertentieafbeeldingen",
+    "Permission:CarListingImages.Create": "Advertentieafbeelding aanmaken",
+    "Permission:CarListingImages.Edit": "Advertentieafbeelding bewerken",
+    "Permission:CarListingImages.Delete": "Advertentieafbeelding verwijderen"
 
   }
 }

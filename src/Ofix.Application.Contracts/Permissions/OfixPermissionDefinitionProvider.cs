@@ -36,6 +36,11 @@ public class OfixPermissionDefinitionProvider : PermissionDefinitionProvider
         carListingsPermission.AddChild(OfixPermissions.CarListings.Edit, L("Permission:CarListings.Edit"));
         carListingsPermission.AddChild(OfixPermissions.CarListings.Delete, L("Permission:CarListings.Delete"));
 
+        var carListingImagesPermission = myGroup.AddPermission(OfixPermissions.CarListingImages.Default, L("Permission:CarListingImages"));
+        carListingImagesPermission.AddChild(OfixPermissions.CarListingImages.Create, L("Permission:CarListingImages.Create"));
+        carListingImagesPermission.AddChild(OfixPermissions.CarListingImages.Edit, L("Permission:CarListingImages.Edit"));
+        carListingImagesPermission.AddChild(OfixPermissions.CarListingImages.Delete, L("Permission:CarListingImages.Delete"));
+
         //Define your own permissions here. Example:
         //myGroup.AddPermission(OfixPermissions.MyPermission1, L("Permission:MyPermission1"));
     }

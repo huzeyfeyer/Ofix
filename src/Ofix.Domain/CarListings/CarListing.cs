@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Volo.Abp.Domain.Entities.Auditing;
+using Ofix.CarListingImages;
 
 namespace Ofix.CarListings
 {
@@ -27,5 +28,7 @@ namespace Ofix.CarListings
         public Brand? Brand { get; set; }
         public Model? Model { get; set; }
         public SubModel? SubModel { get; set; }
+
+        public ICollection<CarListingImage> Images { get; set; } = new List<CarListingImage>();
     }
 }

@@ -152,7 +152,12 @@
     "SelectListingStatus": "İlan durumu seçin",
     "SelectTransmission": "Vites türü seçin",
     "SelectFuelType": "Yakıt türü seçin",
-    "SelectBodyShape": "Kasa tipi seçin"
+    "SelectBodyShape": "Kasa tipi seçin",
+
+    "Permission:CarListingImages": "İlan Fotoğrafları",
+    "Permission:CarListingImages.Create": "İlan Fotoğrafı Oluştur",
+    "Permission:CarListingImages.Edit": "İlan Fotoğrafı Düzenle",
+    "Permission:CarListingImages.Delete": "İlan Fotoğrafı Sil"
 
 
 

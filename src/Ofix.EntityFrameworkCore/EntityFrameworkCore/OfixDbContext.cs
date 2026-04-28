@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Ofix.Books;
 using Ofix.Brands;
+using Ofix.CarListingImages;
 using Ofix.CarListings;
 using Ofix.FeatureCategories;
 using Ofix.Features;
@@ -38,6 +39,7 @@ public class OfixDbContext :
     public DbSet<FeatureCategory> FeatureCategories  { get; set; }
     public DbSet<Feature> Features { get; set; }
     public DbSet<CarListing> CarListings { get; set; }
+    public DbSet<CarListingImage> CarListingImages { get; set; }
 
 
     #region Entities from the modules
@@ -161,7 +163,7 @@ public class OfixDbContext :
                 .OnDelete(DeleteBehavior.Restrict);
         });
 
-        /* Configure SubModel entity */
+        /* Configure CarListing entity */
 
         builder.Entity<CarListing>(b =>
         {
@@ -189,6 +191,35 @@ public class OfixDbContext :
                 .HasForeignKey(x => x.SubModelId)
                 .OnDelete(DeleteBehavior.Restrict);
         });
+
+
+
+        /* Configure CarListingImage entity */
+
+        builder.Entity<CarListingImage>(b =>
+        {
+            b.ToTable(OfixConsts.DbTablePrefix + "CarListingImages", OfixConsts.DbSchema);
+
+            b.ConfigureByConvention();
+
+            b.Property(x => x.FileName)
+                .IsRequired()
+                .HasMaxLength(255);
+
+            b.Property(x => x.ContentType)
+                .IsRequired()
+                .HasMaxLength(100);
+
+            b.Property(x => x.BlobName)
+                .IsRequired()
+                .HasMaxLength(500);
+
+            b.HasOne(x => x.CarListing)
+                .WithMany(x => x.Images)
+                .HasForeignKey(x => x.CarListingId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+
 
 
         /* Configure FeatureCategory entity */
