@@ -2,21 +2,28 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Ofix.Brands;
+using Ofix.CarListingImages;
 using Ofix.CarListings;
 using Ofix.Models;
 using Ofix.SubModels;
 using Volo.Abp.Application.Dtos;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace Ofix.Web.Pages.CarListings
 {
     public class CreateModel : OfixPageModel
     {
         [BindProperty]
-        public CreateUpdateCarListingDto CarListing { get; set; }
+        public CreateUpdateCarListingDto CarListing { get; set; } = new();
+
+        [BindProperty]
+        public string CarListingImagesState { get; set; } = string.Empty;
 
         public List<SelectListItem> Brands { get; set; } = new();
         public List<SelectListItem> Models { get; set; } = new();
@@ -37,27 +44,29 @@ namespace Ofix.Web.Pages.CarListings
             return language switch
             {
                 "tr" => "₺",
-                "nl" => "€"
-
+                "nl" => "€",
+                _ => "€"
             };
         }
-
 
         private readonly ICarListingAppService _carListingAppService;
         private readonly IBrandAppService _brandAppService;
         private readonly IModelAppService _modelAppService;
         private readonly ISubModelAppService _subModelAppService;
+        private readonly ICarListingImageAppService _carListingImageAppService;
 
         public CreateModel(
             ICarListingAppService carListingAppService,
             IBrandAppService brandAppService,
             IModelAppService modelAppService,
-            ISubModelAppService subModelAppService)
+            ISubModelAppService subModelAppService,
+            ICarListingImageAppService carListingImageAppService)
         {
             _carListingAppService = carListingAppService;
             _brandAppService = brandAppService;
             _modelAppService = modelAppService;
             _subModelAppService = subModelAppService;
+            _carListingImageAppService = carListingImageAppService;
         }
 
         public async Task OnGetAsync()
@@ -111,8 +120,39 @@ namespace Ofix.Web.Pages.CarListings
                 await LoadLookupsAsync();
                 return Page();
             }
+            
+            var createdCarListing = await _carListingAppService.CreateAsync(CarListing);
 
-            await _carListingAppService.CreateAsync(CarListing);
+            if (string.IsNullOrWhiteSpace(CarListingImagesState))
+            {
+                throw new Exception("CarListingImagesState BOS");
+            }
+
+            var images = JsonSerializer.Deserialize<List<SaveCarListingImageInput>>(
+                CarListingImagesState,
+                new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                }
+            );
+
+            if (images == null)
+            {
+                throw new Exception("DESERIALIZE NULL");
+            }
+
+            if (!images.Any())
+            {
+                throw new Exception("IMAGES EMPTY");
+            }
+
+            foreach (var img in images)
+            {
+                Console.WriteLine("TOKEN: " + img.TempFileToken);
+            }
+
+            await _carListingImageAppService.SaveImagesAsync(createdCarListing.Id, images);
+
             return RedirectToPage("/CarListings/Index");
         }
 
@@ -186,6 +226,92 @@ namespace Ofix.Web.Pages.CarListings
                     })
                 );
             }
+        }
+
+        public async Task<JsonResult> OnPostUploadTempAsync(IFormFile file)
+        {
+            if (file == null)
+            {
+                Response.StatusCode = 400;
+                return new JsonResult(new { error = "File was not provided." });
+            }
+
+            var extension = Path.GetExtension(file.FileName)?.ToLowerInvariant();
+            var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".webp" };
+
+            if (string.IsNullOrWhiteSpace(extension) || !allowedExtensions.Contains(extension))
+            {
+                Response.StatusCode = 400;
+                return new JsonResult(new { error = "Only JPG, JPEG, PNG, and WEBP files are allowed." });
+            }
+
+            if (file.Length > 5 * 1024 * 1024)
+            {
+                Response.StatusCode = 400;
+                return new JsonResult(new { error = "The file size cannot be greater than 5 MB." });
+            }
+
+            var tempFolder = Path.Combine(
+                Directory.GetCurrentDirectory(),
+                "wwwroot",
+                "uploads",
+                "temp",
+                "car-listings"
+            );
+
+            if (!Directory.Exists(tempFolder))
+            {
+                Directory.CreateDirectory(tempFolder);
+            }
+
+            var tempFileToken = Guid.NewGuid().ToString("N");
+            var tempFileName = tempFileToken + extension;
+            var fullPath = Path.Combine(tempFolder, tempFileName);
+
+            await using (var stream = new FileStream(fullPath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            return new JsonResult(new
+            {
+                tempFileToken,
+                fileName = file.FileName,
+                url = $"/uploads/temp/car-listings/{tempFileName}"
+            });
+        }
+
+        public IActionResult OnPostRemoveTempAsync(string tempFileToken)
+        {
+            if (string.IsNullOrWhiteSpace(tempFileToken))
+            {
+                return new JsonResult(new { success = true });
+            }
+
+            var tempFolder = Path.Combine(
+                Directory.GetCurrentDirectory(),
+                "wwwroot",
+                "uploads",
+                "temp",
+                "car-listings"
+            );
+
+            if (!Directory.Exists(tempFolder))
+            {
+                return new JsonResult(new { success = true });
+            }
+
+            var matchingFiles = Directory.GetFiles(tempFolder, tempFileToken + ".*");
+
+            foreach (var file in matchingFiles)
+            {
+                if (System.IO.File.Exists(file))
+                {
+                    System.IO.File.Delete(file);
+                }
+            }
+
+            return new JsonResult(new { success = true });
         }
 
         private List<SelectListItem> BuildYearList()

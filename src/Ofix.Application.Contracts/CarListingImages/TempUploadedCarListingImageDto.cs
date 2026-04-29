@@ -1,15 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ofix.CarListingImages
-{
-    public class TempUploadedCarListingImageDto
-    {
-        public string TempFileToken { get; set; } = string.Empty;
-
-        public string FileName { get; set; } = string.Empty;
-
-        public string Url { get; set; } = string.Empty;
-    }
-}
+/* 
+This file is no longer used by the AppService or any other components because Temp Upload logic is now entirely handled by the MVC UI Layer in Create.cshtml.cs and Edit.cshtml.cs.
+You may safely delete this file from your project at your convenience.
+*/

@@ -23,7 +23,7 @@ namespace Ofix.CarListingImages
         public bool IsCover { get; set; }
 
         public CarListing? CarListing { get; set; }
-        public ICollection<CarListingImage> Images { get; set; } = new List<CarListingImage>();
+        
 
     }
 }

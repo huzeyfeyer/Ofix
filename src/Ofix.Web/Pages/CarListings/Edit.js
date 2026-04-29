@@ -114,4 +114,8 @@
     } else {
         priceInput.val(formatThousands(priceInput.val().split(',')[0]));
     }
+
+    if (window.ofix && window.ofix.carListingImages) {
+        window.ofix.carListingImages.init();
+    }
 });

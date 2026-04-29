@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -175,6 +175,16 @@ public class OfixWebModule : AbpModule
             options.Conventions.AuthorizePage("/Books/Index", OfixPermissions.Books.Default);
             options.Conventions.AuthorizePage("/Books/CreateModal", OfixPermissions.Books.Create);
             options.Conventions.AuthorizePage("/Books/EditModal", OfixPermissions.Books.Edit);
+        });
+
+        Configure<Microsoft.AspNetCore.Builder.StaticFileOptions>(options =>
+        {
+            var provider = new Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider();
+            if (!provider.Mappings.ContainsKey(".webp"))
+            {
+                provider.Mappings[".webp"] = "image/webp";
+            }
+            options.ContentTypeProvider = provider;
         });
     }
 

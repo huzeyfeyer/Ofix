@@ -1,17 +1,29 @@
-﻿@page
+@page
 @using Microsoft.Extensions.Localization
 @using Ofix.Localization
 @using System.Globalization
 @model Ofix.Web.Pages.CarListings.EditModel
 @inject IStringLocalizer<OfixResource> L
 
+@section styles
+{
+    <link rel="stylesheet" href="https://unpkg.com/filepond/dist/filepond.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css" />
+}
+
 @section scripts
 {
+    <abp-script src="https://unpkg.com/filepond/dist/filepond.min.js" />
+    <abp-script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js" />
+    <abp-script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.min.js" />
+    <abp-script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.min.js" />
+    <abp-script src="/Pages/CarListings/carListing-images.js" />
     <abp-script src="/Pages/CarListings/Edit.js" />
 }
 
 <input type="hidden" id="CarListingLocalization_SelectModel" value="@L["SelectModel"].Value" />
 <input type="hidden" id="CarListingLocalization_SelectSubModel" value="@L["SelectSubModel"].Value" />
+<input type="hidden" id="CarListingLocalization_CoverPhoto" value="@L["CoverPhoto"].Value" />
 
 <form method="post" id="CarListingEditForm">
     <div class="card">
@@ -112,9 +124,14 @@
                 </div>
 
                 <div class="tab-pane fade" id="photos" role="tabpanel">
-                    <div class="border rounded p-4 text-center text-muted">
-                        @L["PhotoUploadWillBeAddedLater"]
+                    <div class="mb-3">
+                        <label class="form-label">@L["Photos"]</label>
+                        <input type="file" id="CarListingPhotos" multiple />
+                        <small class="text-muted d-block mt-2">
+                            @L["CarListingPhotoUploadHelp"]
+                        </small>
                     </div>
+                    <input type="hidden" asp-for="CarListingImagesState" id="CarListingImagesState" />
                 </div>
             </div>
         </div>

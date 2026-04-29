@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Hosting;
 using Ofix.Permissions;
 using System;
@@ -8,6 +8,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.Application.Services;
+using Microsoft.Extensions.Logging;
+using Volo.Abp.Content;
 using Volo.Abp.Domain.Repositories;
 
 namespace Ofix.CarListingImages
@@ -17,20 +19,23 @@ namespace Ofix.CarListingImages
     {
         private readonly IRepository<CarListingImage, Guid> _repository;
         private readonly IHostEnvironment _hostEnvironment;
+        private readonly Microsoft.Extensions.Logging.ILogger<CarListingImageAppService> _logger;
 
         private string WebRootPath => Path.Combine(_hostEnvironment.ContentRootPath, "wwwroot");
 
         public CarListingImageAppService(
             IRepository<CarListingImage, Guid> repository,
-            IHostEnvironment hostEnvironment)
+            IHostEnvironment hostEnvironment,
+            Microsoft.Extensions.Logging.ILogger<CarListingImageAppService> logger)
         {
             _repository = repository;
             _hostEnvironment = hostEnvironment;
+            _logger = logger;
         }
 
         public async Task<List<CarListingImageDto>> GetListAsync(Guid carListingId)
         {
-            var queryable = await _repository.WithDetailsAsync(x => x.CarListing);
+            var queryable = await _repository.GetQueryableAsync();
 
             var images = await AsyncExecuter.ToListAsync(
                 queryable
@@ -44,7 +49,7 @@ namespace Ofix.CarListingImages
         [Authorize(OfixPermissions.CarListingImages.Edit)]
         public async Task SaveImagesAsync(Guid carListingId, List<SaveCarListingImageInput> images)
         {
-            var queryable = await _repository.WithDetailsAsync(x => x.CarListing);
+            var queryable = await _repository.GetQueryableAsync();
 
             var existingImages = await AsyncExecuter.ToListAsync(
                 queryable.Where(x => x.CarListingId == carListingId)
@@ -52,14 +57,13 @@ namespace Ofix.CarListingImages
 
             foreach (var input in images)
             {
+                
                 if (input.ExistingImageId.HasValue)
                 {
                     var existingImage = existingImages.FirstOrDefault(x => x.Id == input.ExistingImageId.Value);
 
                     if (existingImage == null)
-                    {
                         continue;
-                    }
 
                     if (input.IsDeleted)
                     {
@@ -75,12 +79,21 @@ namespace Ofix.CarListingImages
                     continue;
                 }
 
+               
                 if (!string.IsNullOrWhiteSpace(input.TempFileToken) && !input.IsDeleted)
                 {
+                    var tempFolder = Path.Combine(
+                        WebRootPath,
+                        "uploads",
+                        "temp",
+                        "car-listings"
+                    );
+
                     var tempFilePath = FindTempFilePath(input.TempFileToken);
 
                     if (string.IsNullOrWhiteSpace(tempFilePath) || !File.Exists(tempFilePath))
                     {
+                        _logger.LogWarning("Temp file not found for token {Token} (carListingId={CarListingId})", input.TempFileToken, carListingId);
                         continue;
                     }
 
@@ -94,14 +107,21 @@ namespace Ofix.CarListingImages
                     );
 
                     if (!Directory.Exists(permanentFolder))
-                    {
                         Directory.CreateDirectory(permanentFolder);
-                    }
 
                     var permanentFileName = Guid.NewGuid().ToString("N") + extension;
                     var permanentFullPath = Path.Combine(permanentFolder, permanentFileName);
 
-                    File.Move(tempFilePath, permanentFullPath);
+                    try
+                    {
+                        File.Move(tempFilePath, permanentFullPath);
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex, "Failed to move temp file {TempPath} to {PermanentPath}", tempFilePath, permanentFullPath);
+                        // skip this file but continue processing others
+                        continue;
+                    }
 
                     var fileInfo = new FileInfo(permanentFullPath);
 
@@ -117,96 +137,15 @@ namespace Ofix.CarListingImages
                     };
 
                     await _repository.InsertAsync(image, autoSave: true);
+                    _logger.LogInformation("Saved image for carListingId={CarListingId}: {BlobName}", carListingId, image.BlobName);
                 }
             }
 
+            
             await EnsureSingleCoverAsync(carListingId);
         }
 
-        [Authorize(OfixPermissions.CarListingImages.Create)]
-        public async Task<TempUploadedCarListingImageDto> UploadTempAsync(UploadTempCarListingImageInput input)
-        {
-            if (input.File == null)
-            {
-                throw new UserFriendlyException("File was not provided.");
-            }
 
-            var fileName = input.File.FileName;
-            var extension = Path.GetExtension(fileName)?.ToLowerInvariant();
-
-            var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".webp" };
-
-            if (string.IsNullOrWhiteSpace(extension) || !allowedExtensions.Contains(extension))
-            {
-                throw new UserFriendlyException("Only JPG, JPEG, PNG, and WEBP files are allowed.");
-            }
-
-            if (input.File.ContentLength > 5 * 1024 * 1024)
-            {
-                throw new UserFriendlyException("The file size cannot be greater than 5 MB.");
-            }
-
-            var tempFolder = Path.Combine(
-                WebRootPath,
-                "uploads",
-                "temp",
-                "car-listings"
-            );
-
-            if (!Directory.Exists(tempFolder))
-            {
-                Directory.CreateDirectory(tempFolder);
-            }
-
-            var tempFileToken = Guid.NewGuid().ToString("N");
-            var tempFileName = tempFileToken + extension;
-            var fullPath = Path.Combine(tempFolder, tempFileName);
-
-            await using (var stream = new FileStream(fullPath, FileMode.Create))
-            {
-                await input.File.GetStream().CopyToAsync(stream);
-            }
-
-            return new TempUploadedCarListingImageDto
-            {
-                TempFileToken = tempFileToken,
-                FileName = fileName,
-                Url = $"/uploads/temp/car-listings/{tempFileName}"
-            };
-        }
-
-        [Authorize(OfixPermissions.CarListingImages.Delete)]
-        public Task RemoveTempAsync(string tempFileToken)
-        {
-            if (string.IsNullOrWhiteSpace(tempFileToken))
-            {
-                return Task.CompletedTask;
-            }
-
-            var tempFolder = Path.Combine(
-                WebRootPath,
-                "uploads",
-                "temp",
-                "car-listings"
-            );
-
-            if (!Directory.Exists(tempFolder))
-            {
-                return Task.CompletedTask;
-            }
-
-            var matchingFiles = Directory.GetFiles(tempFolder, tempFileToken + ".*");
-
-            foreach (var file in matchingFiles)
-            {
-                if (File.Exists(file))
-                {
-                    File.Delete(file);
-                }
-            }
-
-            return Task.CompletedTask;
-        }
 
         private CarListingImageDto MapToCarListingImageDto(CarListingImage image)
         {
@@ -236,7 +175,15 @@ namespace Ofix.CarListingImages
                 return null;
             }
 
-            return Directory.GetFiles(tempFolder, tempFileToken + ".*").FirstOrDefault();
+            try
+            {
+                return Directory.GetFiles(tempFolder, tempFileToken + ".*").FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error finding temp file for token {Token}", tempFileToken);
+                return null;
+            }
         }
 
         private void DeletePermanentFileIfExists(string? relativePath)

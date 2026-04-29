@@ -18,6 +18,9 @@ namespace Ofix.Web.Pages.CarListings
         [BindProperty]
         public CreateUpdateCarListingDto CarListing { get; set; } = new();
 
+        [BindProperty]
+        public string CarListingImagesState { get; set; } = string.Empty;
+
         public List<SelectListItem> Brands { get; set; } = new();
         public List<SelectListItem> Models { get; set; } = new();
         public List<SelectListItem> SubModels { get; set; } = new();
@@ -46,17 +49,20 @@ namespace Ofix.Web.Pages.CarListings
         private readonly IBrandAppService _brandAppService;
         private readonly IModelAppService _modelAppService;
         private readonly ISubModelAppService _subModelAppService;
+        private readonly Ofix.CarListingImages.ICarListingImageAppService _carListingImageAppService;
 
         public EditModel(
             ICarListingAppService carListingAppService,
             IBrandAppService brandAppService,
             IModelAppService modelAppService,
-            ISubModelAppService subModelAppService)
+            ISubModelAppService subModelAppService,
+            Ofix.CarListingImages.ICarListingImageAppService carListingImageAppService)
         {
             _carListingAppService = carListingAppService;
             _brandAppService = brandAppService;
             _modelAppService = modelAppService;
             _subModelAppService = subModelAppService;
+            _carListingImageAppService = carListingImageAppService;
         }
 
         public async Task<IActionResult> OnGetAsync(Guid id)
@@ -78,6 +84,26 @@ namespace Ofix.Web.Pages.CarListings
                 BodyShape = entity.BodyShape,
                 Description = entity.Description
             };
+
+            var existingImages = await _carListingImageAppService.GetListAsync(id);
+
+            var stateItems = existingImages.Select(x => new
+            {
+                existingImageId = x.Id,
+                tempFileToken = (string)null,
+                sortOrder = x.SortOrder,
+                isCover = x.IsCover,
+                isDeleted = false,
+                url = x.Url,
+                fileName = x.FileName,
+                fileSize = x.FileSize,
+                contentType = x.ContentType
+            }).ToList();
+
+            CarListingImagesState = System.Text.Json.JsonSerializer.Serialize(stateItems, new System.Text.Json.JsonSerializerOptions
+            {
+                PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase
+            });
 
             await LoadLookupsAsync();
             return Page();
@@ -130,6 +156,23 @@ namespace Ofix.Web.Pages.CarListings
             }
 
             await _carListingAppService.UpdateAsync(id, CarListing);
+
+            if (!string.IsNullOrWhiteSpace(CarListingImagesState))
+            {
+                var images = System.Text.Json.JsonSerializer.Deserialize<List<Ofix.CarListingImages.SaveCarListingImageInput>>(
+                    CarListingImagesState,
+                    new System.Text.Json.JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    }
+                );
+
+                if (images != null)
+                {
+                    await _carListingImageAppService.SaveImagesAsync(id, images);
+                }
+            }
+
             return RedirectToPage("/CarListings/Index");
         }
 
