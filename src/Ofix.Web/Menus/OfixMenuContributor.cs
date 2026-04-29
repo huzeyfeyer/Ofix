@@ -34,6 +34,16 @@ public class OfixMenuContributor : IMenuContributor
             )
         );
 
+        context.Menu.AddItem(
+            new ApplicationMenuItem(
+                "Ofix.Marketplace",
+                l["Menu:Marketplace"],
+                "~/Marketplace",
+                icon: "fa fa-car",
+                order: 2
+            )
+        );
+
 
         //Administration
         var administration = context.Menu.GetAdministration();

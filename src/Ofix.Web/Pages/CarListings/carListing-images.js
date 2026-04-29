@@ -18,10 +18,12 @@ window.ofix.carListingImages = (function () {
         var visibleState = files.map((file, index) => {
             var existingId = null;
             var token = null;
+            var existingUrl = null;
 
             if (file.origin === 2) {
                 // LOCAL file originally passed in 'files' property
-                existingId = file.source;
+                existingId = file.getMetadata('existingImageId') || null;
+                existingUrl = file.source || file.getMetadata('url') || null;
             } else {
                 token = file.serverId;
             }
@@ -34,7 +36,7 @@ window.ofix.carListingImages = (function () {
                 sortOrder: index,
                 isCover: index === 0,
                 isDeleted: false,
-                url: oldItem ? oldItem.url : null
+                url: oldItem ? oldItem.url : existingUrl
             };
         });
 
@@ -92,16 +94,17 @@ window.ofix.carListingImages = (function () {
                     imageState = loaded;
                     pondFiles = loaded.map(function(item) {
                         return {
-                            source: item.existingImageId,
+                            source: item.url,
                             options: {
                                 type: 'local',
                                 file: {
                                     name: item.fileName,
                                     size: item.fileSize,
-                                    type: 'image/jpeg' // Force ImagePreview to attach
+                                    type: item.contentType || 'image/jpeg'
                                 },
                                 metadata: {
-                                    poster: window.location.origin + item.url
+                                    existingImageId: item.existingImageId,
+                                    url: item.url
                                 }
                             }
                         };
@@ -124,29 +127,31 @@ window.ofix.carListingImages = (function () {
             files: pondFiles,
             server: {
                 load: function (source, load, error, progress, abort, headers) {
-                    var item = imageState.find(x => x.existingImageId === source);
-                    if (item && item.url) {
-                        var request = new XMLHttpRequest();
-                        request.open('GET', item.url);
-                        request.responseType = 'blob';
-                        request.onload = function() {
-                            if (request.status >= 200 && request.status < 300) {
-                                // Provide identical mock file type to prevent FilePond from discarding preview.
-                                var forcedFile = new File([request.response], item.fileName, { type: 'image/jpeg' });
-                                load(forcedFile);
-                            } else {
-                                console.error('HTTP Error in load:', request.status);
-                                error('HTTP ' + request.status);
-                            }
-                        };
-                        request.onerror = function() {
-                            console.error('XHR Error in load');
-                            error('XHR Error');
-                        };
-                        request.send();
-                    } else {
+                    if (!source) {
                         error('File not found');
+                        return;
                     }
+
+                    var request = new XMLHttpRequest();
+                    request.open('GET', source);
+                    request.responseType = 'blob';
+                    request.onload = function() {
+                        if (request.status >= 200 && request.status < 300) {
+                            var extension = (source.split('.').pop() || 'jpg').split('?')[0];
+                            var fileName = 'image.' + extension;
+                            var contentType = request.response && request.response.type
+                                ? request.response.type
+                                : 'image/jpeg';
+                            var previewFile = new File([request.response], fileName, { type: contentType });
+                            load(previewFile);
+                        } else {
+                            error('HTTP ' + request.status);
+                        }
+                    };
+                    request.onerror = function() {
+                        error('XHR Error');
+                    };
+                    request.send();
                 },
                 process: {
                     url: '/CarListings/Create?handler=UploadTemp',
@@ -192,7 +197,7 @@ window.ofix.carListingImages = (function () {
         });
 
         // Ensure latest state is written just before the form submits
-        var form = document.getElementById('CarListingCreateForm');
+        var form = document.getElementById('CarListingCreateForm') || document.getElementById('CarListingEditForm');
         if (form) {
             form.addEventListener('submit', function () {
                 updateStateFromPond();

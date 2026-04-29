@@ -27,5 +27,6 @@ namespace Ofix.CarListings
         public BodyShapeType BodyShape { get; set; }
         public DateTime CreationTime { get; set; }
         public string Description { get; set; } = string.Empty;
+        public string? CoverImageUrl { get; set; }
     }
 }

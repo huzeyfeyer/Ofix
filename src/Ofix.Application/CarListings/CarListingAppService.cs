@@ -25,7 +25,8 @@ namespace Ofix.CarListings
             var queryable = await _repository.WithDetailsAsync(
                 x => x.Brand,
                 x => x.Model,
-                x => x.SubModel
+                x => x.SubModel,
+                x => x.Images
             );
 
             var carListing = await AsyncExecuter.FirstOrDefaultAsync(queryable.Where(x => x.Id == id));
@@ -43,7 +44,8 @@ namespace Ofix.CarListings
             var queryable = await _repository.WithDetailsAsync(
                 x => x.Brand,
                 x => x.Model,
-                x => x.SubModel
+                x => x.SubModel,
+                x => x.Images
             );
 
             var filteredQuery = queryable
@@ -89,7 +91,8 @@ namespace Ofix.CarListings
             var createdQuery = await _repository.WithDetailsAsync(
                 x => x.Brand,
                 x => x.Model,
-                x => x.SubModel
+                x => x.SubModel,
+                x => x.Images
             );
 
             var createdEntity = await AsyncExecuter.FirstOrDefaultAsync(createdQuery.Where(x => x.Id == carListing.Id));
@@ -120,7 +123,8 @@ namespace Ofix.CarListings
             var updatedQuery = await _repository.WithDetailsAsync(
                 x => x.Brand,
                 x => x.Model,
-                x => x.SubModel
+                x => x.SubModel,
+                x => x.Images
             );
 
             var updatedEntity = await AsyncExecuter.FirstOrDefaultAsync(updatedQuery.Where(x => x.Id == id));
@@ -154,7 +158,11 @@ namespace Ofix.CarListings
                 FuelType = carListing.FuelType,
                 BodyShape = carListing.BodyShape,
                 Description = carListing.Description,
-                CreationTime = carListing.CreationTime
+                CreationTime = carListing.CreationTime,
+                CoverImageUrl = carListing.Images
+                    .OrderBy(x => x.SortOrder)
+                    .FirstOrDefault(x => x.IsCover)?.BlobName
+                    ?? carListing.Images.OrderBy(x => x.SortOrder).FirstOrDefault()?.BlobName
             };
         }
     }
