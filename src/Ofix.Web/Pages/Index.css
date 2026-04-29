@@ -3,6 +3,7 @@
     position: relative;
     z-index: 2;
 }
+
 .card-bg-image {
     pointer-events: none;
     position: absolute;
@@ -12,4 +13,5 @@
     right: 0;
     z-index: 1;
 }
+
 /* Getting-Started End */

@@ -159,7 +159,9 @@
     "Permission:CarListingImages.Edit": "İlan Fotoğrafı Düzenle",
     "Permission:CarListingImages.Delete": "İlan Fotoğrafı Sil",
     "CarListingPhotoUploadHelp": "En fazla 10 fotoğraf yükleyebilirsiniz. İzin verilen formatlar: JPG, PNG, WEBP. Maksimum boyut: 5 MB.",
-    "CoverPhoto": "Kapak Fotoğrafı"
+    "CoverPhoto": "Kapak Fotoğrafı",
+    "VehicleCard:New": "Yeni",
+    "VehicleCard:Dealer": "Satıcı"
 
 
 

@@ -182,7 +182,9 @@
     "Permission:CarListingImages.Edit": "Advertentieafbeelding bewerken",
     "Permission:CarListingImages.Delete": "Advertentieafbeelding verwijderen",
     "CarListingPhotoUploadHelp": "Je kunt maximaal 10 foto's uploaden. Toegestane formaten: JPG, PNG, WEBP. Maximale grootte: 5 MB.",
-    "CoverPhoto": "Omslagfoto"
+    "CoverPhoto": "Omslagfoto",
+    "VehicleCard:New": "Nieuw",
+    "VehicleCard:Dealer": "Dealer"
 
   }
 }
