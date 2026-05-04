@@ -50,8 +50,19 @@ namespace Ofix.CarListings
 
             var filteredQuery = queryable
                 .WhereIf(!input.Title.IsNullOrWhiteSpace(), x => x.Title.Contains(input.Title!))
+                .WhereIf(input.BrandId.HasValue, x => x.BrandId == input.BrandId)
+                .WhereIf(input.ModelId.HasValue, x => x.ModelId == input.ModelId)
                 .WhereIf(input.SubModelId.HasValue, x => x.SubModelId == input.SubModelId.Value)
-                .WhereIf(input.ListingStatus.HasValue, x => x.ListingStatus == input.ListingStatus.Value);
+                .WhereIf(input.ListingStatus.HasValue, x => x.ListingStatus == input.ListingStatus.Value)
+                .WhereIf(input.MinPrice.HasValue, x => x.Price >= input.MinPrice.Value)
+                .WhereIf(input.MaxPrice.HasValue, x => x.Price <= input.MaxPrice.Value)
+                .WhereIf(input.MinMileage.HasValue, x => x.Mileage >= input.MinMileage.Value)
+                .WhereIf(input.MaxMileage.HasValue, x => x.Mileage <= input.MaxMileage.Value)
+                .WhereIf(input.MinYear.HasValue, x => x.Year >= input.MinYear.Value)
+                .WhereIf(input.MaxYear.HasValue, x => x.Year <= input.MaxYear.Value)
+                .WhereIf(input.FuelType.HasValue, x => x.FuelType == input.FuelType.Value)
+                .WhereIf(input.Transmission.HasValue, x => x.Transmission == input.Transmission.Value)
+                .WhereIf(input.BodyShape.HasValue, x => x.BodyShape == input.BodyShape.Value);
 
             var totalCount = await AsyncExecuter.CountAsync(filteredQuery);
 

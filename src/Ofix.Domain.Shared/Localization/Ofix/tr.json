@@ -173,6 +173,11 @@
     "Marketplace:Previous": "Önceki",
     "Marketplace:Next": "Sonraki",
     "Marketplace:PageInfo": "Sayfa {0}/{1} - Toplam {2} ilan",
+    "Marketplace:From": "Min.",
+    "Marketplace:To": "Maks.",
+    "Marketplace:AllFuelTypes": "Tüm yakıt türleri",
+    "Marketplace:AllTransmissions": "Tüm şanzımanlar",
+    "Marketplace:AllBodyTypes": "Tüm kasa tipleri",
     "VehicleCard:New": "Yeni",
     "VehicleCard:Dealer": "Satıcı"
 

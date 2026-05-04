@@ -1,4 +1,6 @@
 @page
+@using System
+@using Ofix.CarListings
 @using Ofix.Localization
 @using Ofix.Web.Menus
 @using Volo.Abp.AspNetCore.Mvc.UI.Layout
@@ -10,6 +12,7 @@
     PageLayout.Content.Title = L["Menu:Marketplace"].Value;
     PageLayout.Content.BreadCrumb.ShowCurrent = true;
     PageLayout.Content.MenuItemName = "Ofix.Marketplace";
+    var maxJaar = DateTime.Now.Year + CarListingConsts.MaxYearOffsetFromCurrent;
 }
 
 @section styles {
@@ -54,6 +57,75 @@
                         <input id="SearchTitle" type="text" class="form-control" placeholder="@L["Title"]" />
                     </div>
 
+                    <div class="mb-3">
+                        <label class="form-label">@L["Year"]</label>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <input id="MinYear" type="number" class="form-control" min="@CarListingConsts.MinYear" max="@maxJaar" placeholder="@L["Marketplace:From"]" />
+                            </div>
+                            <div class="col-6">
+                                <input id="MaxYear" type="number" class="form-control" min="@CarListingConsts.MinYear" max="@maxJaar" placeholder="@L["Marketplace:To"]" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">@L["Price"]</label>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <input id="MinPrice" type="number" class="form-control" min="0" step="1" placeholder="@L["Marketplace:From"]" />
+                            </div>
+                            <div class="col-6">
+                                <input id="MaxPrice" type="number" class="form-control" min="0" step="1" placeholder="@L["Marketplace:To"]" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">@L["Mileage"]</label>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <input id="MinMileage" type="number" class="form-control" min="0" step="1" placeholder="@L["Marketplace:From"]" />
+                            </div>
+                            <div class="col-6">
+                                <input id="MaxMileage" type="number" class="form-control" min="0" step="1" placeholder="@L["Marketplace:To"]" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="FuelType">@L["FuelType"]</label>
+                        <select id="FuelType" class="form-select">
+                            <option value="">@L["Marketplace:AllFuelTypes"]</option>
+                            @foreach (FuelType optie in Enum.GetValues<FuelType>())
+                            {
+                                <option value="@((int)optie)">@L["Enum:FuelType:" + optie.ToString()]</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="Transmission">@L["Transmission"]</label>
+                        <select id="Transmission" class="form-select">
+                            <option value="">@L["Marketplace:AllTransmissions"]</option>
+                            @foreach (TransmissionType optie in Enum.GetValues<TransmissionType>())
+                            {
+                                <option value="@((int)optie)">@L["Enum:TransmissionType:" + optie.ToString()]</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="BodyShape">@L["BodyShape"]</label>
+                        <select id="BodyShape" class="form-select">
+                            <option value="">@L["Marketplace:AllBodyTypes"]</option>
+                            @foreach (BodyShapeType optie in Enum.GetValues<BodyShapeType>())
+                            {
+                                <option value="@((int)optie)">@L["Enum:BodyShapeType:" + optie.ToString()]</option>
+                            }
+                        </select>
+                    </div>
+
                     <div class="d-grid gap-2">
                         <button id="ApplyFiltersButton" type="button" class="btn btn-primary">
                             @L["Marketplace:ApplyFilters"]
@@ -69,7 +141,9 @@
 
     <div class="col-12 col-lg-9">
         <div id="MarketplaceStateMessage" class="alert alert-light d-none" role="status"></div>
-        <div id="MarketplaceCards" class="row g-3"></div>
+        <div id="MarketplaceCards"
+             class="row g-3"
+             data-kaarten-url="@Url.Page("/Marketplace/Index", "Kaarten")"></div>
         <div class="marketplace-pagination d-flex justify-content-between align-items-center mt-3">
             <button id="PreviousPageButton" type="button" class="btn btn-outline-secondary btn-sm">@L["Marketplace:Previous"]</button>
             <span id="MarketplacePageInfo" class="small text-muted"></span>

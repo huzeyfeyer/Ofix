@@ -196,6 +196,11 @@
     "Marketplace:Previous": "Vorige",
     "Marketplace:Next": "Volgende",
     "Marketplace:PageInfo": "Pagina {0}/{1} - Totaal {2} advertenties",
+    "Marketplace:From": "Van",
+    "Marketplace:To": "Tot",
+    "Marketplace:AllFuelTypes": "Alle brandstoffen",
+    "Marketplace:AllTransmissions": "Alle transmissies",
+    "Marketplace:AllBodyTypes": "Alle carrosserieën",
     "VehicleCard:New": "Nieuw",
     "VehicleCard:Dealer": "Dealer"
 

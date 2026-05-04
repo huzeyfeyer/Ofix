@@ -9,6 +9,15 @@ $(function () {
     var $model = $('#ModelId');
     var $subModel = $('#SubModelId');
     var $searchTitle = $('#SearchTitle');
+    var $minYear = $('#MinYear');
+    var $maxYear = $('#MaxYear');
+    var $minPrice = $('#MinPrice');
+    var $maxPrice = $('#MaxPrice');
+    var $minMileage = $('#MinMileage');
+    var $maxMileage = $('#MaxMileage');
+    var $fuelType = $('#FuelType');
+    var $transmission = $('#Transmission');
+    var $bodyShape = $('#BodyShape');
     var $cards = $('#MarketplaceCards');
     var $state = $('#MarketplaceStateMessage');
     var $pageInfo = $('#MarketplacePageInfo');
@@ -33,56 +42,16 @@ $(function () {
             .replaceAll("'", '&#039;');
     }
 
-    function getFuelTypeLabel(fuelType) {
-        var map = {
-            0: 'Petrol',
-            1: 'Diesel',
-            2: 'LPG',
-            3: 'Hybrid',
-            4: 'Electric'
-        };
-
-        if (map[fuelType] === undefined) {
-            return '';
-        }
-
-        return l('Enum:FuelType:' + map[fuelType]);
-    }
-
-    function renderCards(items) {
-        if (!items || items.length === 0) {
-            $cards.empty();
-            setStateMessage(l('Marketplace:NoResults'), true);
+    function zetQueryAlsIngevuld(url, naam, $input) {
+        var raw = $input.val();
+        if (raw === undefined || raw === null) {
             return;
         }
-
-        setStateMessage('', false);
-
-        var cardsHtml = items.map(function (item) {
-            var fuelTypeText = getFuelTypeLabel(item.fuelType);
-            var isNewBadge = item.listingStatus === listingStatusActive
-                ? '<span class="badge rounded-pill bg-warning text-dark mb-3">' + escapeHtml(l('VehicleCard:New')) + '</span>'
-                : '';
-
-            return '' +
-                '<div class="col-12 col-md-6 col-xl-4">' +
-                '  <article class="vehicle-card h-100 border rounded-3 overflow-hidden bg-white">' +
-                '    <a href="#" class="text-decoration-none text-reset d-block">' +
-                '      <div class="vehicle-card-image-wrapper">' +
-                '        <img src="' + escapeHtml(item.coverImageUrl || 'https://placehold.co/640x360?text=Ofix') + '" alt="' + escapeHtml(item.title) + '" class="vehicle-card-image w-100" />' +
-                '      </div>' +
-                '      <div class="vehicle-card-content p-3">' +
-                '        <h3 class="h5 mb-2 fw-bold">' + escapeHtml(item.title || '') + '</h3>' +
-                '        <div class="fs-4 fw-bold mb-2">€ ' + escapeHtml(item.price) + '</div>' +
-                '        <div class="text-muted mb-3">' + escapeHtml(item.year) + ' | ' + escapeHtml(item.mileage) + ' km | ' + escapeHtml(fuelTypeText) + '</div>' +
-                '        ' + isNewBadge +
-                '      </div>' +
-                '    </a>' +
-                '  </article>' +
-                '</div>';
-        }).join('');
-
-        $cards.html(cardsHtml);
+        var tekst = String(raw).trim();
+        if (tekst === '') {
+            return;
+        }
+        url.searchParams.set(naam, tekst);
     }
 
     function updatePaginationState() {
@@ -93,18 +62,73 @@ $(function () {
     }
 
     function loadListings() {
+        var cardsUrl = $cards.data('kaarten-url');
+        if (!cardsUrl) {
+            setStateMessage(l('Marketplace:LoadFailed'), true);
+            return;
+        }
+
         setStateMessage(l('Marketplace:Loading'), true);
 
-        ofix.carListings.carListing.getList({
-            skipCount: (currentPage - 1) * pageSize,
-            maxResultCount: pageSize,
-            sorting: 'creationTime DESC',
-            title: $searchTitle.val() || null,
-            subModelId: $subModel.val() || null,
-            listingStatus: listingStatusActive
-        }).then(function (result) {
-            totalCount = result.totalCount || 0;
-            renderCards(result.items || []);
+        var url = new URL(cardsUrl, window.location.href);
+        url.searchParams.set('skipCount', String((currentPage - 1) * pageSize));
+        url.searchParams.set('maxResultCount', String(pageSize));
+        url.searchParams.set('sorting', 'creationTime DESC');
+
+        var title = $searchTitle.val();
+        if (title) {
+            url.searchParams.set('title', title);
+        }
+
+        var brandId = $brand.val();
+        if (brandId) {
+            url.searchParams.set('brandId', brandId);
+        }
+
+        var modelId = $model.val();
+        if (modelId) {
+            url.searchParams.set('modelId', modelId);
+        }
+
+        var subModelId = $subModel.val();
+        if (subModelId) {
+            url.searchParams.set('subModelId', subModelId);
+        }
+
+        zetQueryAlsIngevuld(url, 'minYear', $minYear);
+        zetQueryAlsIngevuld(url, 'maxYear', $maxYear);
+        zetQueryAlsIngevuld(url, 'minPrice', $minPrice);
+        zetQueryAlsIngevuld(url, 'maxPrice', $maxPrice);
+        zetQueryAlsIngevuld(url, 'minMileage', $minMileage);
+        zetQueryAlsIngevuld(url, 'maxMileage', $maxMileage);
+        zetQueryAlsIngevuld(url, 'fuelType', $fuelType);
+        zetQueryAlsIngevuld(url, 'transmission', $transmission);
+        zetQueryAlsIngevuld(url, 'bodyShape', $bodyShape);
+
+        fetch(url.toString(), {
+            credentials: 'same-origin',
+            headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        }).then(function (response) {
+            var headerTotal = response.headers.get('X-Total-Count');
+            if (headerTotal !== null && headerTotal !== '') {
+                totalCount = parseInt(headerTotal, 10) || 0;
+            }
+
+            if (!response.ok) {
+                throw new Error('load failed');
+            }
+
+            return response.text();
+        }).then(function (html) {
+            if (totalCount === 0) {
+                $cards.empty();
+                setStateMessage(l('Marketplace:NoResults'), true);
+                updatePaginationState();
+                return;
+            }
+
+            setStateMessage('', false);
+            $cards.html(html);
             updatePaginationState();
         }).catch(function () {
             setStateMessage(l('Marketplace:LoadFailed'), true);
@@ -192,6 +216,15 @@ $(function () {
         $brand.val('');
         resetSelect($model, l('Marketplace:AllModels'), true);
         resetSelect($subModel, l('Marketplace:AllSubModels'), true);
+        $minYear.val('');
+        $maxYear.val('');
+        $minPrice.val('');
+        $maxPrice.val('');
+        $minMileage.val('');
+        $maxMileage.val('');
+        $fuelType.val('');
+        $transmission.val('');
+        $bodyShape.val('');
         loadListings();
     });
 

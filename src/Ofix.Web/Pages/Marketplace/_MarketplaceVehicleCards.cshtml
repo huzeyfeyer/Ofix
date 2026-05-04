@@ -1,0 +1,8 @@
+@model IReadOnlyList<Ofix.Web.Pages.Shared.Cards.VehicleCardViewModel>
+
+@foreach (var card in Model)
+{
+    <div class="col-12 col-md-6 col-xl-4">
+        <partial name="~/Pages/Shared/Cards/_VehicleCard.cshtml" model="card" />
+    </div>
+}

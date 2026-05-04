@@ -94,7 +94,7 @@ window.ofix.carListingImages = (function () {
                     imageState = loaded;
                     pondFiles = loaded.map(function(item) {
                         return {
-                            source: item.url,
+                            source: abp.appPath + item.url,
                             options: {
                                 type: 'local',
                                 file: {
@@ -104,7 +104,7 @@ window.ofix.carListingImages = (function () {
                                 },
                                 metadata: {
                                     existingImageId: item.existingImageId,
-                                    url: item.url
+                                    url: abp.appPath + item.url
                                 }
                             }
                         };
