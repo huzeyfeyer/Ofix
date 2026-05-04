@@ -43,7 +43,7 @@ namespace Ofix.CarListingImages
                     .OrderBy(x => x.SortOrder)
             );
 
-            return images.Select(MapToCarListingImageDto).ToList();
+            return images.Select(x => MapToCarListingImageDto(x)).ToList();
         }
 
         [Authorize(OfixPermissions.CarListingImages.Edit)]
@@ -51,9 +51,9 @@ namespace Ofix.CarListingImages
         {
             var queryable = await _repository.GetQueryableAsync();
 
-            var existingImages = await AsyncExecuter.ToListAsync(
-                queryable.Where(x => x.CarListingId == carListingId)
-            );
+            var existingImages = await _repository.GetListAsync(
+                x => x.CarListingId == carListingId
+                );
 
             foreach (var input in images)
             {

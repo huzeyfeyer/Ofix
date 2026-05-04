@@ -1,6 +1,7 @@
 ﻿using Ofix.Models;
 using Ofix.SubModels;
 using Ofix.Brands;
+using Ofix.CarListingImages;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -25,8 +26,9 @@ namespace Ofix.CarListings
         public TransmissionType Transmission { get; set; }
         public FuelType FuelType { get; set; }
         public BodyShapeType BodyShape { get; set; }
-        public DateTime CreationTime { get; set; }
         public string Description { get; set; } = string.Empty;
         public string? CoverImageUrl { get; set; }
+
+        public List<CarListingImageDto> Images { get; set; } = new List<CarListingImageDto>();
     }
 }

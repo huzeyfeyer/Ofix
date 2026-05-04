@@ -1,11 +1,15 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Ofix.CarListingImages;
+using Ofix.Models;
 using Ofix.Permissions;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
+using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Repositories;
 
 namespace Ofix.CarListings
@@ -36,7 +40,28 @@ namespace Ofix.CarListings
                 throw new Exception("Car listing not found.");
             }
 
-            return MapToCarListingDto(carListing);
+            return MapToCarListingDto(carListing, includeAllImages: false);
+        }
+
+        [AllowAnonymous]
+        public virtual async Task<CarListingDto> GetPublishedDetailAsync(Guid id)
+        {
+            var queryable = await _repository.WithDetailsAsync(
+                x => x.Brand,
+                x => x.Model,
+                x => x.SubModel,
+                x => x.Images
+            );
+
+            var carListing = await AsyncExecuter.FirstOrDefaultAsync(
+                queryable.Where(x => x.Id == id && x.ListingStatus == ListingStatus.Active));
+
+            if (carListing == null)
+            {
+                throw new EntityNotFoundException(typeof(CarListing), id);
+            }
+
+            return MapToCarListingDto(carListing, includeAllImages: true);
         }
 
         public async Task<PagedResultDto<CarListingDto>> GetListAsync(CarListingListInput input)
@@ -73,7 +98,7 @@ namespace Ofix.CarListings
                     .Take(input.MaxResultCount)
             );
 
-            var items = carListings.Select(MapToCarListingDto).ToList();
+            var items = carListings.Select(x => MapToCarListingDto(x, includeAllImages: false)).ToList();
 
             return new PagedResultDto<CarListingDto>(totalCount, items);
         }
@@ -108,7 +133,7 @@ namespace Ofix.CarListings
 
             var createdEntity = await AsyncExecuter.FirstOrDefaultAsync(createdQuery.Where(x => x.Id == carListing.Id));
 
-            return MapToCarListingDto(createdEntity!);
+            return MapToCarListingDto(createdEntity!, includeAllImages: false);
         }
 
         [Authorize(OfixPermissions.CarListings.Edit)]
@@ -140,7 +165,7 @@ namespace Ofix.CarListings
 
             var updatedEntity = await AsyncExecuter.FirstOrDefaultAsync(updatedQuery.Where(x => x.Id == id));
 
-            return MapToCarListingDto(updatedEntity!);
+            return MapToCarListingDto(updatedEntity!, includeAllImages: false);
         }
 
         [Authorize(OfixPermissions.CarListings.Delete)]
@@ -149,8 +174,12 @@ namespace Ofix.CarListings
             await _repository.DeleteAsync(id);
         }
 
-        private CarListingDto MapToCarListingDto(CarListing carListing)
+        private CarListingDto MapToCarListingDto(CarListing carListing, bool includeAllImages)
         {
+            var imageVolgorde = carListing.Images != null
+                ? carListing.Images.OrderBy(x => x.SortOrder).ToList()
+                : new List<CarListingImage>();
+
             return new CarListingDto
             {
                 Id = carListing.Id,
@@ -170,10 +199,30 @@ namespace Ofix.CarListings
                 BodyShape = carListing.BodyShape,
                 Description = carListing.Description,
                 CreationTime = carListing.CreationTime,
-                CoverImageUrl = carListing.Images
-                    .OrderBy(x => x.SortOrder)
+                CoverImageUrl = imageVolgorde
                     .FirstOrDefault(x => x.IsCover)?.BlobName
-                    ?? carListing.Images.OrderBy(x => x.SortOrder).FirstOrDefault()?.BlobName
+                    ?? imageVolgorde.FirstOrDefault()?.BlobName,
+                Images = includeAllImages
+                    ? imageVolgorde.Select(MapNaarCarListingImageDto).ToList()
+                    : new List<CarListingImageDto>()
+            };
+        }
+
+        private static CarListingImageDto MapNaarCarListingImageDto(CarListingImage afbeelding)
+        {
+            return new CarListingImageDto
+            {
+                Id = afbeelding.Id,
+                FileName = afbeelding.FileName,
+                ContentType = afbeelding.ContentType,
+                FileSize = afbeelding.FileSize,
+                Url = afbeelding.BlobName,
+                SortOrder = afbeelding.SortOrder,
+                IsCover = afbeelding.IsCover,
+                CreationTime = afbeelding.CreationTime,
+                CreatorId = afbeelding.CreatorId,
+                LastModificationTime = afbeelding.LastModificationTime,
+                LastModifierId = afbeelding.LastModifierId
             };
         }
     }

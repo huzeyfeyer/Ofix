@@ -201,6 +201,11 @@
     "Marketplace:AllFuelTypes": "Alle brandstoffen",
     "Marketplace:AllTransmissions": "Alle transmissies",
     "Marketplace:AllBodyTypes": "Alle carrosserieën",
+    "Marketplace:BackToMarketplace": "Terug naar marktplaats",
+    "Marketplace:GalleryPrevious": "Vorige foto",
+    "Marketplace:GalleryNext": "Volgende foto",
+    "Marketplace:GalleryFullscreen": "Volledig scherm",
+    "Marketplace:GalleryPickPhoto": "Foto {0} tonen",
     "VehicleCard:New": "Nieuw",
     "VehicleCard:Dealer": "Dealer"
 

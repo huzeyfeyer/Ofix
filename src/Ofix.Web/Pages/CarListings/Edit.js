@@ -1,4 +1,4 @@
-﻿$(function () {
+$(function () {
     var form = $('#CarListingEditForm');
 
     var brandSelect = $('#CarListing_BrandId');
@@ -101,6 +101,21 @@
     form.on('submit', function () {
         mileageInput.val(onlyDigits(mileageInput.val()));
         priceInput.val(onlyDigits(priceInput.val()));
+
+        setTimeout(function() {
+            var firstInvalid = form.find('.input-validation-error').first();
+            if (firstInvalid.length > 0) {
+                var tabPane = firstInvalid.closest('.tab-pane');
+                if (tabPane.length > 0) {
+                    var tabId = tabPane.attr('id');
+                    var tabTrigger = document.querySelector('button[data-bs-target="#' + tabId + '"]');
+                    if (tabTrigger) {
+                        var tab = new bootstrap.Tab(tabTrigger);
+                        tab.show();
+                    }
+                }
+            }
+        }, 100);
     });
 
     if (mileageInput.val() === '0') {

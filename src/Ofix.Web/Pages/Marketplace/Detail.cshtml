@@ -1,0 +1,149 @@
+@page "/Marketplace/Detail/{id:guid}"
+@using System.Linq
+@using Ofix.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout
+@using Microsoft.AspNetCore.Mvc.Localization
+@model Ofix.Web.Pages.Marketplace.DetailModel
+@inject IPageLayout PageLayout
+@inject IHtmlLocalizer<OfixResource> L
+@{
+    PageLayout.Content.Title = Model.Listing.Title;
+    PageLayout.Content.BreadCrumb.ShowCurrent = true;
+    PageLayout.Content.MenuItemName = "Ofix.Marketplace";
+    var fotoLijst = Model.Listing.Images.OrderBy(x => x.SortOrder).ToList();
+}
+
+@section styles {
+    <abp-style src="/Pages/Marketplace/Index.css" />
+    <abp-style src="/Pages/Marketplace/Detail.css" />
+}
+
+@section scripts {
+    <abp-script src="/Pages/Marketplace/Detail.js" />
+}
+
+<div class="container py-3 marketplace-detail">
+    <div class="mb-3">
+        <a class="btn btn-outline-secondary btn-sm" href="@Url.Page("/Marketplace/Index")">@L["Marketplace:BackToMarketplace"]</a>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-12 col-lg-7">
+            @if (fotoLijst.Count > 1)
+            {
+                <div id="CarDetailGalleryRoot" class="car-detail-gallery position-relative rounded overflow-hidden border">
+                    <div id="CarDetailGalleryCounter"
+                         class="car-detail-gallery__counter position-absolute top-0 end-0 m-2 px-2 py-1 rounded text-bg-dark">
+                        1 / @fotoLijst.Count
+                    </div>
+                    <div id="CarDetailCarousel"
+                         class="carousel slide"
+                         data-bs-ride="false"
+                         data-bs-wrap="true"
+                         data-bs-interval="false">
+                        <div class="carousel-inner">
+                            @for (var i = 0; i < fotoLijst.Count; i++)
+                            {
+                                var foto = fotoLijst[i];
+                                <div class="carousel-item @(i == 0 ? "active" : "")">
+                                    <img src="@Model.ToonAfbeeldingUrl(foto.Url)"
+                                         alt="@Model.Listing.Title"
+                                         class="car-detail-gallery__main" />
+                                </div>
+                            }
+                        </div>
+                        <button class="carousel-control-prev"
+                                type="button"
+                                data-bs-target="#CarDetailCarousel"
+                                data-bs-slide="prev"
+                                aria-label="@L["Marketplace:GalleryPrevious"]">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        </button>
+                        <button class="carousel-control-next"
+                                type="button"
+                                data-bs-target="#CarDetailCarousel"
+                                data-bs-slide="next"
+                                aria-label="@L["Marketplace:GalleryNext"]">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        </button>
+                        <button type="button"
+                                id="CarDetailGalleryFullscreenBtn"
+                                class="car-detail-gallery__fullscreen-btn"
+                                aria-label="@L["Marketplace:GalleryFullscreen"]"
+                                title="@L["Marketplace:GalleryFullscreen"]">
+                            <span class="fa fa-expand" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                    <div class="car-detail-gallery__thumbs-track bg-white">
+                        <div id="CarDetailGalleryThumbs" class="car-detail-gallery__thumbs d-flex gap-2 py-2 px-2">
+                            @for (var i = 0; i < fotoLijst.Count; i++)
+                            {
+                                var foto = fotoLijst[i];
+                                <button type="button"
+                                        class="car-detail-gallery__thumb @(i == 0 ? "active" : "")"
+                                        data-slide-to="@i"
+                                        aria-label="@L["Marketplace:GalleryPickPhoto", i + 1]">
+                                    <img src="@Model.ToonAfbeeldingUrl(foto.Url)"
+                                         alt=""
+                                         class="car-detail-gallery__thumb-img" />
+                                </button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+            else if (fotoLijst.Count == 1)
+            {
+                <div class="rounded overflow-hidden border bg-dark text-center">
+                    <img src="@Model.ToonAfbeeldingUrl(fotoLijst[0].Url)"
+                         alt="@Model.Listing.Title"
+                         class="w-100 car-detail-gallery__main" />
+                </div>
+            }
+            else
+            {
+                <img src="@Model.ToonAfbeeldingUrl(Model.Listing.CoverImageUrl)"
+                     alt="@Model.Listing.Title"
+                     class="img-fluid rounded border w-100" />
+            }
+        </div>
+
+        <div class="col-12 col-lg-5">
+            <h1 class="h3 fw-bold mb-2">@Model.Listing.Title</h1>
+            <p class="fs-3 fw-bold mb-3">€ @Model.Listing.Price.ToString("N0")</p>
+
+            <dl class="row small mb-0">
+                @if (!string.IsNullOrWhiteSpace(Model.Listing.BrandName))
+                {
+                    <dt class="col-5 text-muted">@L["Brand"]</dt>
+                    <dd class="col-7">@Model.Listing.BrandName</dd>
+                }
+                @if (!string.IsNullOrWhiteSpace(Model.Listing.ModelName))
+                {
+                    <dt class="col-5 text-muted">@L["Model"]</dt>
+                    <dd class="col-7">@Model.Listing.ModelName</dd>
+                }
+                @if (!string.IsNullOrWhiteSpace(Model.Listing.SubModelName))
+                {
+                    <dt class="col-5 text-muted">@L["SubModel"]</dt>
+                    <dd class="col-7">@Model.Listing.SubModelName</dd>
+                }
+                <dt class="col-5 text-muted">@L["Year"]</dt>
+                <dd class="col-7">@Model.Listing.Year</dd>
+                <dt class="col-5 text-muted">@L["Mileage"]</dt>
+                <dd class="col-7">@Model.Listing.Mileage km</dd>
+                <dt class="col-5 text-muted">@L["FuelType"]</dt>
+                <dd class="col-7">@L["Enum:FuelType:" + Model.Listing.FuelType]</dd>
+                <dt class="col-5 text-muted">@L["Transmission"]</dt>
+                <dd class="col-7">@L["Enum:TransmissionType:" + Model.Listing.Transmission]</dd>
+                <dt class="col-5 text-muted">@L["BodyShape"]</dt>
+                <dd class="col-7">@L["Enum:BodyShapeType:" + Model.Listing.BodyShape]</dd>
+            </dl>
+        </div>
+
+        <div class="col-12">
+            <h2 class="h5 fw-bold mb-2">@L["Description"]</h2>
+            <div class="border rounded-3 p-3 bg-light" style="white-space: pre-wrap;">@Model.Listing.Description</div>
+        </div>
+    </div>
+</div>

@@ -84,7 +84,7 @@
 
                         <div class="col-md-6">
                             <label asp-for="CarListing.Mileage" class="form-label">@L["Mileage"]</label>
-                            <input asp-for="CarListing.Mileage" id="CarListing_Mileage" class="form-control js-number-format" inputmode="numeric" autocomplete="off" />
+                            <input type="text" asp-for="CarListing.Mileage" id="CarListing_Mileage" class="form-control js-number-format" inputmode="numeric" autocomplete="off" />
                             <span asp-validation-for="CarListing.Mileage" class="text-danger"></span>
                         </div>
 
@@ -108,7 +108,7 @@
                             <label asp-for="CarListing.Price" class="form-label">@L["Price"]</label>
                             <div class="input-group">
                                 <span class="input-group-text">@Model.CurrencySymbol</span>
-                                <input asp-for="CarListing.Price" id="CarListing_Price" class="form-control js-number-format" inputmode="numeric" autocomplete="off" />
+                                <input type="text" asp-for="CarListing.Price" id="CarListing_Price" class="form-control js-number-format" inputmode="numeric" autocomplete="off" />
                             </div>
                             <span asp-validation-for="CarListing.Price" class="text-danger"></span>
                         </div>

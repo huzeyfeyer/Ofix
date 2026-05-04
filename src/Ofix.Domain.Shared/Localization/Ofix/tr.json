@@ -178,6 +178,11 @@
     "Marketplace:AllFuelTypes": "Tüm yakıt türleri",
     "Marketplace:AllTransmissions": "Tüm şanzımanlar",
     "Marketplace:AllBodyTypes": "Tüm kasa tipleri",
+    "Marketplace:BackToMarketplace": "Pazara dön",
+    "Marketplace:GalleryPrevious": "Önceki fotoğraf",
+    "Marketplace:GalleryNext": "Sonraki fotoğraf",
+    "Marketplace:GalleryFullscreen": "Tam ekran",
+    "Marketplace:GalleryPickPhoto": "{0}. fotoğrafı göster",
     "VehicleCard:New": "Yeni",
     "VehicleCard:Dealer": "Satıcı"
 

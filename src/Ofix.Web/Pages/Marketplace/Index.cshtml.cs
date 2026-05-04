@@ -73,7 +73,7 @@ public class IndexModel : OfixPageModel
         return new VehicleCardViewModel
         {
             Id = dto.Id.ToString(),
-            DetailUrl = "#",
+            DetailUrl = Url.Page("/Marketplace/Detail", values: new { id = dto.Id }) ?? "#",
             ImageUrl = ResolveCoverImageUrl(dto.CoverImageUrl),
             Title = dto.Title ?? string.Empty,
             PriceText = "€ " + dto.Price.ToString("N0", CultureInfo.CurrentUICulture),
