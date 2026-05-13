@@ -15,5 +15,6 @@ namespace Ofix.CarListings
             CreateUpdateCarListingDto>
     {
         Task<CarListingDto> GetPublishedDetailAsync(Guid id);
+        Task<PagedResultDto<CarListingDto>> GetPublishedListAsync(CarListingListInput input);
     }
 }

@@ -32,12 +32,14 @@ public class BrandAppService : ApplicationService, IBrandAppService
         _brandImageContainer = brandImageContainer;
     }
 
+    [AllowAnonymous]
     public async Task<BrandDto> GetAsync(Guid id)
     {
         var brand = await _repository.GetAsync(id);
         return ObjectMapper.Map<Brand, BrandDto>(brand);
     }
 
+    [AllowAnonymous]
     public async Task<PagedResultDto<BrandDto>> GetListAsync(PagedAndSortedResultRequestDto input)
     {
         var queryable = await _repository.GetQueryableAsync();

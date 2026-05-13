@@ -42,6 +42,10 @@ namespace Ofix.Migrations
                 type: "bit",
                 nullable: false,
                 defaultValue: false);
+
+            migrationBuilder.Sql("UPDATE AppBrands SET IsActive = 1");
+            migrationBuilder.Sql("UPDATE AppModels SET IsActive = 1");
+            migrationBuilder.Sql("UPDATE AppSubModels SET IsActive = 1");
         }
 
         /// <inheritdoc />

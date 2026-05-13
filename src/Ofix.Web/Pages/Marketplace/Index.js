@@ -1,6 +1,6 @@
 $(function () {
     var l = abp.localization.getResource('Ofix');
-    var listingStatusActive = 1;
+    var isActiveFilter = true;
     var currentPage = 1;
     var pageSize = 9;
     var totalCount = 0;
@@ -167,7 +167,7 @@ $(function () {
             maxResultCount: 1000,
             sorting: 'name',
             brandId: brandId,
-            listingStatus: listingStatusActive
+            isActive: isActiveFilter
         }).then(function (result) {
             $model.prop('disabled', false);
             (result.items || []).forEach(function (item) {
@@ -188,7 +188,7 @@ $(function () {
             maxResultCount: 1000,
             sorting: 'name',
             modelId: modelId,
-            listingStatus: listingStatusActive
+            isActive: isActiveFilter
         }).then(function (result) {
             $subModel.prop('disabled', false);
             (result.items || []).forEach(function (item) {

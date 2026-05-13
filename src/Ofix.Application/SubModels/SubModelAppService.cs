@@ -23,12 +23,14 @@ namespace Ofix.SubModels
             _repository = repository;
         }
 
+        [AllowAnonymous]
         public async Task<SubModelDto> GetAsync(Guid id)
         {
             var subModel = await _repository.GetAsync(id);
             return ObjectMapper.Map<SubModel, SubModelDto>(subModel);
         }
 
+        [AllowAnonymous]
         public async Task<PagedResultDto<SubModelDto>> GetListAsync(SubModelListInput input)
         {
             var queryable = await _repository.GetQueryableAsync();

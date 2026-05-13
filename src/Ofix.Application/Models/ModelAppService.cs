@@ -26,12 +26,14 @@ namespace Ofix.Models;
         _repository = repository;
     }
 
+    [AllowAnonymous]
     public async Task<ModelDto> GetAsync(Guid id)
     {
         var model = await _repository.GetAsync(id);
         return ObjectMapper.Map<Model, ModelDto>(model);
     }
 
+    [AllowAnonymous]
     public async Task<PagedResultDto<ModelDto>> GetListAsync(ModelListInput input)
     {
         var queryable = await _repository.GetQueryableAsync();

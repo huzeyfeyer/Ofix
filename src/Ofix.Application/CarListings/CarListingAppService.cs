@@ -64,6 +64,13 @@ namespace Ofix.CarListings
             return MapToCarListingDto(carListing, includeAllImages: true);
         }
 
+        [AllowAnonymous]
+        public virtual async Task<PagedResultDto<CarListingDto>> GetPublishedListAsync(CarListingListInput input)
+        {
+            input.ListingStatus = ListingStatus.Active;
+            return await GetListAsync(input);
+        }
+
         public async Task<PagedResultDto<CarListingDto>> GetListAsync(CarListingListInput input)
         {
             var queryable = await _repository.WithDetailsAsync(

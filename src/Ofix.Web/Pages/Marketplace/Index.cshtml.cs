@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Ofix.CarListings;
-using Ofix.Models;
 using Ofix.Web.Pages.Shared.Cards;
 
 namespace Ofix.Web.Pages.Marketplace;
@@ -55,11 +54,10 @@ public class IndexModel : OfixPageModel
             FuelType = fuelType,
             Transmission = transmission,
             BodyShape = bodyShape,
-            ListingStatus = ListingStatus.Active,
             Sorting = string.IsNullOrWhiteSpace(sorting) ? "creationTime DESC" : sorting
         };
 
-        var result = await _carListingAppService.GetListAsync(input);
+        var result = await _carListingAppService.GetPublishedListAsync(input);
 
         Response.Headers["X-Total-Count"] = result.TotalCount.ToString(CultureInfo.InvariantCulture);
 
