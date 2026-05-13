@@ -207,7 +207,10 @@
     "Marketplace:GalleryFullscreen": "Volledig scherm",
     "Marketplace:GalleryPickPhoto": "Foto {0} tonen",
     "VehicleCard:New": "Nieuw",
-    "VehicleCard:Dealer": "Dealer"
+    "VehicleCard:Dealer": "Dealer",
 
+    "IsActive": "Actief",
+    "Active": "Actief",
+    "Passive": "Passief"
   }
 }

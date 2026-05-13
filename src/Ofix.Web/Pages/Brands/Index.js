@@ -72,21 +72,12 @@
                     data: "orderNo"
                 },
                 {
-                    title: l('Status'),
-                    data: "status",
+                    title: l('IsActive'),
+                    data: "isActive",
                     render: function (data) {
-                        console.log("Brand status:", data);
-
-                        const map = {
-                            0: 'Draft',
-                            1: 'Active',
-                            2: 'Reserved',
-                            3: 'Sold',
-                            4: 'Expired',
-                            5: 'Passive'
-                        };
-
-                        return l('Enum:ListingStatus:' + map[data]);
+                        return data
+                            ? '<span class="badge bg-success">' + l('Active') + '</span>'
+                            : '<span class="badge bg-secondary">' + l('Passive') + '</span>';
                     }
                 },
                 {

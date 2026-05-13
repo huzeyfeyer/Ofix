@@ -13,10 +13,8 @@ namespace Ofix.SubModels
 
         public int OrderNo { get; set; }
 
-        public Ofix.Models.ListingStatus ListingStatus { get; set; } = Ofix.Models.ListingStatus.Draft;
+        public bool IsActive { get; set; } = true;
 
         public string Slug { get; set; } = string.Empty;
-
-
     }
 }

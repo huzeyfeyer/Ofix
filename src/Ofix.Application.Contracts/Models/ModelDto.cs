@@ -10,7 +10,7 @@ namespace Ofix.Models
         public Guid BrandId { get; set; }
         public string Name { get; set; } = string.Empty;
         public int OrderNo { get; set; }
-        public ListingStatus ListingStatus { get; set; } = Models.ListingStatus.Draft;
+        public bool IsActive { get; set; } = true;
         public string Slug { get; set; } = string.Empty;
     }
 }

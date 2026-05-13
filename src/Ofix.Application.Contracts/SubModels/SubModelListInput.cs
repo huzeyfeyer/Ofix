@@ -1,5 +1,4 @@
-﻿using Ofix.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using Volo.Abp.Application.Dtos;
@@ -12,6 +11,6 @@ namespace Ofix.SubModels
 
         public string? Name { get; set; }
 
-        public ListingStatus? ListingStatus { get; set; }
+        public bool? IsActive { get; set; }
     }
 }

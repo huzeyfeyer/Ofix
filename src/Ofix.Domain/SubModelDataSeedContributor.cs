@@ -40,7 +40,7 @@ namespace Ofix.SubModels
                     ModelId = bmw3Series.Id,
                     Name = "320i",
                     OrderNo = 0,
-                    ListingStatus = ListingStatus.Active,
+                    IsActive = true,
                     Slug = "320i"
                 }, autoSave: true);
             }
@@ -52,7 +52,7 @@ namespace Ofix.SubModels
                     ModelId = mercedesCClass.Id,
                     Name = "C200",
                     OrderNo = 1,
-                    ListingStatus = ListingStatus.Active,
+                    IsActive = true,
                     Slug = "c200"
                 }, autoSave: true);
             }
@@ -64,7 +64,7 @@ namespace Ofix.SubModels
                     ModelId = audiA4.Id,
                     Name = "2.0 TDI",
                     OrderNo = 2,
-                    ListingStatus = ListingStatus.Draft,
+                    IsActive = false,
                     Slug = "2-0-tdi"
                 }, autoSave: true);
             }

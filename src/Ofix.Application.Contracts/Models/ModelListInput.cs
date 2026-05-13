@@ -9,6 +9,6 @@ namespace Ofix.Models
     {
         public Guid? BrandId { get; set; }
         public string? Name { get; set; }
-        public ListingStatus? ListingStatus { get; set; }
+        public bool? IsActive { get; set; }
     }
 }

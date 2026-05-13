@@ -1,5 +1,4 @@
 ﻿using Ofix.Brands;
-using Ofix.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -29,7 +28,7 @@ namespace Ofix
                     {
                         Name = "BMW",
                         OrderNo = 0,
-                        Status = ListingStatus.Active,
+                        IsActive = true,
                         LogoBlobName = null,
                         LogoFileName = null,
                         Slug = "bmw",
@@ -42,7 +41,7 @@ namespace Ofix
                     {
                         Name = "Mercedes",
                         OrderNo = 1,
-                        Status = ListingStatus.Active,
+                        IsActive = true,
                         LogoBlobName = null,
                         LogoFileName = null,
                         Slug = "mercedes",
@@ -55,7 +54,7 @@ namespace Ofix
                     {
                         Name = "Audi",
                         OrderNo = 2,
-                        Status = ListingStatus.Active,
+                        IsActive = true,
                         LogoBlobName = null,
                         LogoFileName = null,
                         Slug = "audi",
@@ -68,19 +67,14 @@ namespace Ofix
                     {
                         Name = "Volkswagen",
                         OrderNo = 3,
-                        Status = ListingStatus.Active,
+                        IsActive = true,
                         LogoBlobName = null,
                         LogoFileName = null,
                         Slug = "volkswagen",
                     },
                     autoSave: true
                 );
-
-
-
             }
         }
-
-
     }
 }

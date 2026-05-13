@@ -39,7 +39,7 @@ namespace Ofix.Models;
         var query = queryable
              .WhereIf(!input.Name.IsNullOrWhiteSpace(), x => x.Name.Contains(input.Name!))
                 .WhereIf(input.BrandId.HasValue, x => x.BrandId == input.BrandId.Value)
-                .WhereIf(input.ListingStatus.HasValue, x => x.ListingStatus == input.ListingStatus.Value)
+                .WhereIf(input.IsActive.HasValue, x => x.IsActive == input.IsActive.Value)
                 .OrderBy(input.Sorting.IsNullOrWhiteSpace() ? "Name" : input.Sorting)
                 .Skip(input.SkipCount)
                 .Take(input.MaxResultCount);
@@ -50,7 +50,7 @@ namespace Ofix.Models;
               queryable
                   .WhereIf(!input.Name.IsNullOrWhiteSpace(), x => x.Name.Contains(input.Name!))
                   .WhereIf(input.BrandId.HasValue, x => x.BrandId == input.BrandId.Value)
-                  .WhereIf(input.ListingStatus.HasValue, x => x.ListingStatus == input.ListingStatus.Value)
+                  .WhereIf(input.IsActive.HasValue, x => x.IsActive == input.IsActive.Value)
           );
 
         return new PagedResultDto<ModelDto>(
@@ -78,7 +78,7 @@ namespace Ofix.Models;
 
         model.Name = input.Name;
         model.OrderNo = input.OrderNo;
-        model.ListingStatus = input.ListingStatus;
+        model.IsActive = input.IsActive;
         model.BrandId = input.BrandId;
         model.Slug = GenerateSlug(input.Name);
 

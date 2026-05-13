@@ -184,9 +184,10 @@
     "Marketplace:GalleryFullscreen": "Tam ekran",
     "Marketplace:GalleryPickPhoto": "{0}. fotoğrafı göster",
     "VehicleCard:New": "Yeni",
-    "VehicleCard:Dealer": "Satıcı"
+    "VehicleCard:Dealer": "Satıcı",
 
-
-
+    "IsActive": "Aktif",
+    "Active": "Aktif",
+    "Passive": "Pasif"
   }
 }

@@ -5,7 +5,6 @@ using System.Linq.Dynamic.Core;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Ofix.Models;
 using Ofix.Permissions;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
@@ -37,7 +36,7 @@ namespace Ofix.SubModels
             var filteredQuery = queryable
                 .WhereIf(!input.Name.IsNullOrWhiteSpace(), x => x.Name.Contains(input.Name!))
                 .WhereIf(input.ModelId.HasValue, x => x.ModelId == input.ModelId.Value)
-                .WhereIf(input.ListingStatus.HasValue, x => x.ListingStatus == input.ListingStatus.Value);
+                .WhereIf(input.IsActive.HasValue, x => x.IsActive == input.IsActive.Value);
 
             var subModels = await AsyncExecuter.ToListAsync(
                 filteredQuery
@@ -74,7 +73,7 @@ namespace Ofix.SubModels
             subModel.ModelId = input.ModelId;
             subModel.Name = input.Name;
             subModel.OrderNo = input.OrderNo;
-            subModel.ListingStatus = input.ListingStatus;
+            subModel.IsActive = input.IsActive;
             subModel.Slug = GenerateSlug(input.Name);
 
             await _repository.UpdateAsync(subModel, autoSave: true);

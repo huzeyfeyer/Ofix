@@ -120,7 +120,7 @@ public class OfixDbContext :
             b.Property(x => x.LogoFileName)
                 .HasMaxLength(256);
 
-            b.Property(x => x.Status)
+            b.Property(x => x.IsActive)
                 .IsRequired();
         });
 
