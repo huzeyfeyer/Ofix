@@ -17,3 +17,21 @@
     padding: 0.5rem 0 1rem;
     border-top: 1px solid var(--bs-border-color);
 }
+
+@media (max-width: 991.98px) {
+    .marketplace-page #FilterPanel .card-body .row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .marketplace-page #FilterPanel .card {
+        border-top: 0;
+        border-radius: 0 0 var(--bs-card-border-radius) var(--bs-card-border-radius);
+    }
+}
+
+.marketplace-page .form-label {
+    font-size: 0.85rem;
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+}

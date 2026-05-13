@@ -208,6 +208,13 @@ $(function () {
     $('#ApplyFiltersButton').on('click', function () {
         currentPage = 1;
         loadListings();
+        var filterPanel = document.getElementById('FilterPanel');
+        if (filterPanel && window.innerWidth < 992) {
+            var bsCollapse = bootstrap.Collapse.getInstance(filterPanel);
+            if (bsCollapse) {
+                bsCollapse.hide();
+            }
+        }
     });
 
     $('#ClearFiltersButton').on('click', function () {

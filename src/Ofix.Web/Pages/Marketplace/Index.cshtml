@@ -23,123 +23,139 @@
     <abp-script src="/Pages/Marketplace/Index.js" />
 }
 
-<div class="row g-3 marketplace-page">
-    <div class="col-12 col-lg-3">
-        <abp-card>
-            <abp-card-header>
-                <abp-card-title>@L["Marketplace:Filters"]</abp-card-title>
-            </abp-card-header>
-            <abp-card-body>
-                <form id="MarketplaceFiltersForm">
-                    <div class="mb-3">
-                        <label class="form-label" for="BrandId">@L["Brand"]</label>
-                        <select id="BrandId" class="form-select">
-                            <option value="">@L["Marketplace:AllBrands"]</option>
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label" for="ModelId">@L["Model"]</label>
-                        <select id="ModelId" class="form-select" disabled>
-                            <option value="">@L["Marketplace:AllModels"]</option>
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label" for="SubModelId">@L["SubModel"]</label>
-                        <select id="SubModelId" class="form-select" disabled>
-                            <option value="">@L["Marketplace:AllSubModels"]</option>
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label" for="SearchTitle">@L["Search"]</label>
-                        <input id="SearchTitle" type="text" class="form-control" placeholder="@L["Title"]" />
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">@L["Year"]</label>
-                        <div class="row g-2">
-                            <div class="col-6">
-                                <input id="MinYear" type="number" class="form-control" min="@CarListingConsts.MinYear" max="@maxJaar" placeholder="@L["Marketplace:From"]" />
-                            </div>
-                            <div class="col-6">
-                                <input id="MaxYear" type="number" class="form-control" min="@CarListingConsts.MinYear" max="@maxJaar" placeholder="@L["Marketplace:To"]" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">@L["Price"]</label>
-                        <div class="row g-2">
-                            <div class="col-6">
-                                <input id="MinPrice" type="number" class="form-control" min="0" step="1" placeholder="@L["Marketplace:From"]" />
-                            </div>
-                            <div class="col-6">
-                                <input id="MaxPrice" type="number" class="form-control" min="0" step="1" placeholder="@L["Marketplace:To"]" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">@L["Mileage"]</label>
-                        <div class="row g-2">
-                            <div class="col-6">
-                                <input id="MinMileage" type="number" class="form-control" min="0" step="1" placeholder="@L["Marketplace:From"]" />
-                            </div>
-                            <div class="col-6">
-                                <input id="MaxMileage" type="number" class="form-control" min="0" step="1" placeholder="@L["Marketplace:To"]" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label" for="FuelType">@L["FuelType"]</label>
-                        <select id="FuelType" class="form-select">
-                            <option value="">@L["Marketplace:AllFuelTypes"]</option>
-                            @foreach (FuelType optie in Enum.GetValues<FuelType>())
-                            {
-                                <option value="@((int)optie)">@L["Enum:FuelType:" + optie.ToString()]</option>
-                            }
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label" for="Transmission">@L["Transmission"]</label>
-                        <select id="Transmission" class="form-select">
-                            <option value="">@L["Marketplace:AllTransmissions"]</option>
-                            @foreach (TransmissionType optie in Enum.GetValues<TransmissionType>())
-                            {
-                                <option value="@((int)optie)">@L["Enum:TransmissionType:" + optie.ToString()]</option>
-                            }
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label" for="BodyShape">@L["BodyShape"]</label>
-                        <select id="BodyShape" class="form-select">
-                            <option value="">@L["Marketplace:AllBodyTypes"]</option>
-                            @foreach (BodyShapeType optie in Enum.GetValues<BodyShapeType>())
-                            {
-                                <option value="@((int)optie)">@L["Enum:BodyShapeType:" + optie.ToString()]</option>
-                            }
-                        </select>
-                    </div>
-
-                    <div class="d-grid gap-2">
-                        <button id="ApplyFiltersButton" type="button" class="btn btn-primary">
-                            @L["Marketplace:ApplyFilters"]
-                        </button>
-                        <button id="ClearFiltersButton" type="button" class="btn btn-outline-secondary">
-                            @L["Marketplace:ClearFilters"]
-                        </button>
-                    </div>
-                </form>
-            </abp-card-body>
-        </abp-card>
+<div class="marketplace-page">
+    <!-- Mobil filter butonu -->
+    <div class="d-lg-none mb-3">
+        <button class="btn btn-outline-primary w-100" type="button"
+                data-bs-toggle="collapse" data-bs-target="#FilterPanel"
+                aria-expanded="false" aria-controls="FilterPanel">
+            <i class="fa fa-sliders me-1"></i> @L["Marketplace:Filters"]
+        </button>
     </div>
 
-    <div class="col-12 col-lg-9">
+    <div class="row g-3">
+        <div class="col-lg-3">
+            <div class="collapse d-lg-block" id="FilterPanel">
+                <abp-card>
+                    <abp-card-header class="d-none d-lg-block">
+                        <abp-card-title>@L["Marketplace:Filters"]</abp-card-title>
+                    </abp-card-header>
+                    <abp-card-body>
+                        <form id="MarketplaceFiltersForm">
+                            <div class="row">
+                                <div class="col-6 col-lg-12 mb-3">
+                                    <label class="form-label" for="BrandId">@L["Brand"]</label>
+                                    <select id="BrandId" class="form-select form-select-sm">
+                                        <option value="">@L["Marketplace:AllBrands"]</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-6 col-lg-12 mb-3">
+                                    <label class="form-label" for="ModelId">@L["Model"]</label>
+                                    <select id="ModelId" class="form-select form-select-sm" disabled>
+                                        <option value="">@L["Marketplace:AllModels"]</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-6 col-lg-12 mb-3">
+                                    <label class="form-label" for="SubModelId">@L["SubModel"]</label>
+                                    <select id="SubModelId" class="form-select form-select-sm" disabled>
+                                        <option value="">@L["Marketplace:AllSubModels"]</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-6 col-lg-12 mb-3">
+                                    <label class="form-label" for="SearchTitle">@L["Search"]</label>
+                                    <input id="SearchTitle" type="text" class="form-control form-control-sm" placeholder="@L["Title"]" />
+                                </div>
+
+                                <div class="col-6 col-lg-12 mb-3">
+                                    <label class="form-label">@L["Year"]</label>
+                                    <div class="row g-1">
+                                        <div class="col-6">
+                                            <input id="MinYear" type="number" class="form-control form-control-sm" min="@CarListingConsts.MinYear" max="@maxJaar" placeholder="@L["Marketplace:From"]" />
+                                        </div>
+                                        <div class="col-6">
+                                            <input id="MaxYear" type="number" class="form-control form-control-sm" min="@CarListingConsts.MinYear" max="@maxJaar" placeholder="@L["Marketplace:To"]" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-6 col-lg-12 mb-3">
+                                    <label class="form-label">@L["Price"]</label>
+                                    <div class="row g-1">
+                                        <div class="col-6">
+                                            <input id="MinPrice" type="number" class="form-control form-control-sm" min="0" step="1" placeholder="@L["Marketplace:From"]" />
+                                        </div>
+                                        <div class="col-6">
+                                            <input id="MaxPrice" type="number" class="form-control form-control-sm" min="0" step="1" placeholder="@L["Marketplace:To"]" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-6 col-lg-12 mb-3">
+                                    <label class="form-label">@L["Mileage"]</label>
+                                    <div class="row g-1">
+                                        <div class="col-6">
+                                            <input id="MinMileage" type="number" class="form-control form-control-sm" min="0" step="1" placeholder="@L["Marketplace:From"]" />
+                                        </div>
+                                        <div class="col-6">
+                                            <input id="MaxMileage" type="number" class="form-control form-control-sm" min="0" step="1" placeholder="@L["Marketplace:To"]" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-6 col-lg-12 mb-3">
+                                    <label class="form-label" for="FuelType">@L["FuelType"]</label>
+                                    <select id="FuelType" class="form-select form-select-sm">
+                                        <option value="">@L["Marketplace:AllFuelTypes"]</option>
+                                        @foreach (FuelType optie in Enum.GetValues<FuelType>())
+                                        {
+                                            <option value="@((int)optie)">@L["Enum:FuelType:" + optie.ToString()]</option>
+                                        }
+                                    </select>
+                                </div>
+
+                                <div class="col-6 col-lg-12 mb-3">
+                                    <label class="form-label" for="Transmission">@L["Transmission"]</label>
+                                    <select id="Transmission" class="form-select form-select-sm">
+                                        <option value="">@L["Marketplace:AllTransmissions"]</option>
+                                        @foreach (TransmissionType optie in Enum.GetValues<TransmissionType>())
+                                        {
+                                            <option value="@((int)optie)">@L["Enum:TransmissionType:" + optie.ToString()]</option>
+                                        }
+                                    </select>
+                                </div>
+
+                                <div class="col-6 col-lg-12 mb-3">
+                                    <label class="form-label" for="BodyShape">@L["BodyShape"]</label>
+                                    <select id="BodyShape" class="form-select form-select-sm">
+                                        <option value="">@L["Marketplace:AllBodyTypes"]</option>
+                                        @foreach (BodyShapeType optie in Enum.GetValues<BodyShapeType>())
+                                        {
+                                            <option value="@((int)optie)">@L["Enum:BodyShapeType:" + optie.ToString()]</option>
+                                        }
+                                    </select>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="d-grid gap-2">
+                                        <button id="ApplyFiltersButton" type="button" class="btn btn-primary btn-sm">
+                                            @L["Marketplace:ApplyFilters"]
+                                        </button>
+                                        <button id="ClearFiltersButton" type="button" class="btn btn-outline-secondary btn-sm">
+                                            @L["Marketplace:ClearFilters"]
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </abp-card-body>
+                </abp-card>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-9">
         <div id="MarketplaceStateMessage" class="alert alert-light d-none" role="status"></div>
         <div id="MarketplaceCards"
              class="row g-3"
@@ -150,4 +166,5 @@
             <button id="NextPageButton" type="button" class="btn btn-outline-secondary btn-sm">@L["Marketplace:Next"]</button>
         </div>
     </div>
+</div>
 </div>
