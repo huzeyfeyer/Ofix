@@ -227,6 +227,7 @@
 
     "IsActive": "Actief",
     "Active": "Actief",
-    "Passive": "Passief"
+    "Passive": "Passief",
+    "SuccessfullySaved": "Succesvol opgeslagen!"
   }
 }

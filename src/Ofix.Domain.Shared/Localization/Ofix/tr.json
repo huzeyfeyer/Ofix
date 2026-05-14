@@ -204,6 +204,7 @@
 
     "IsActive": "Aktif",
     "Active": "Aktif",
-    "Passive": "Pasif"
+    "Passive": "Pasif",
+    "SuccessfullySaved": "Başarıyla kaydedildi!"
   }
 }

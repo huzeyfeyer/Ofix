@@ -173,6 +173,7 @@ namespace Ofix.Web.Pages.CarListings
                 }
             }
 
+            Alerts.Success(L["SuccessfullySaved"]);
             return RedirectToPage("/CarListings/Index");
         }
 

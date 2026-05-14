@@ -41,7 +41,7 @@ namespace Ofix.CarListings
         [Required]
         public BodyShapeType? BodyShape { get; set; }
 
-        [StringLength(2000)]
+        [StringLength(10000)]
         public string Description { get; set; }
     }
 }

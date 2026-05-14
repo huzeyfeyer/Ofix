@@ -153,6 +153,7 @@ namespace Ofix.Web.Pages.CarListings
 
             await _carListingImageAppService.SaveImagesAsync(createdCarListing.Id, images);
 
+            Alerts.Success(L["SuccessfullySaved"]);
             return RedirectToPage("/CarListings/Index");
         }
 

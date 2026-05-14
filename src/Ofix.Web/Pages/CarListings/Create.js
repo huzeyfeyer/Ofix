@@ -90,12 +90,37 @@ $(function () {
     attachNumberFormatting(mileageInput);
     attachNumberFormatting(priceInput);
 
+    var quill = new Quill('#DescriptionEditor', {
+        theme: 'snow',
+        modules: {
+            toolbar: [
+                [{ 'header': [1, 2, false] }],
+                ['bold', 'italic', 'underline'],
+                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                ['link'],
+                ['clean']
+            ]
+        },
+        placeholder: ''
+    });
+
     brandSelect.on('change', function () {
         loadModelsByBrand($(this).val());
     });
 
     modelSelect.on('change', function () {
         loadSubModelsByModel($(this).val());
+    });
+
+    form.find('button[type="submit"]').on('click', function () {
+        mileageInput.val(onlyDigits(mileageInput.val()));
+        priceInput.val(onlyDigits(priceInput.val()));
+
+        var html = quill.root.innerHTML;
+        if (html === '<p><br></p>') {
+            html = '';
+        }
+        $('#CarListing_Description').val(html);
     });
 
     form.on('submit', function () {

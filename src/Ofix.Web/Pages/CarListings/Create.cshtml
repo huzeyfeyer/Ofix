@@ -9,6 +9,14 @@
 {
     <link rel="stylesheet" href="https://unpkg.com/filepond/dist/filepond.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" />
+    <style>
+        #DescriptionEditor .ql-editor {
+            min-height: 120px;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+    </style>
 }
 
 @section scripts
@@ -17,6 +25,7 @@
     <abp-script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js" />
     <abp-script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.min.js" />
     <abp-script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.min.js" />
+    <abp-script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js" />
     <abp-script src="/Pages/CarListings/carListing-images.js" />
     <abp-script src="/Pages/CarListings/Create.js" />
 }
@@ -118,7 +127,9 @@
                         </div>
 
                         <div class="col-md-12">
-                            <abp-input asp-for="CarListing.Description" label="@L["Description"]"></abp-input>
+                            <label class="form-label">@L["Description"]</label>
+                            <div id="DescriptionEditor"></div>
+                            <input type="hidden" asp-for="CarListing.Description" id="CarListing_Description" />
                         </div>
                     </div>
                 </div>

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Ganss.Xss;
+using Microsoft.AspNetCore.Authorization;
 using Ofix.CarListingImages;
 using Ofix.Models;
 using Ofix.Permissions;
@@ -18,10 +19,12 @@ namespace Ofix.CarListings
     public class CarListingAppService : ApplicationService, ICarListingAppService
     {
         private readonly IRepository<CarListing, Guid> _repository;
+        private readonly HtmlSanitizer _htmlSanitizer;
 
         public CarListingAppService(IRepository<CarListing, Guid> repository)
         {
             _repository = repository;
+            _htmlSanitizer = new HtmlSanitizer();
         }
 
         public async Task<CarListingDto> GetAsync(Guid id)
@@ -123,7 +126,9 @@ namespace Ofix.CarListings
                 Year = input.Year,
                 Mileage = input.Mileage,
                 ListingStatus = input.ListingStatus!.Value,
-                Description = input.Description,
+                Description = !string.IsNullOrWhiteSpace(input.Description)
+                    ? _htmlSanitizer.Sanitize(input.Description)
+                    : input.Description,
                 Transmission = input.Transmission!.Value,
                 FuelType = input.FuelType!.Value,
                 BodyShape = input.BodyShape!.Value
@@ -156,7 +161,9 @@ namespace Ofix.CarListings
             carListing.Year = input.Year;
             carListing.Mileage = input.Mileage;
             carListing.ListingStatus = input.ListingStatus!.Value;
-            carListing.Description = input.Description;
+            carListing.Description = !string.IsNullOrWhiteSpace(input.Description)
+                ? _htmlSanitizer.Sanitize(input.Description)
+                : input.Description;
             carListing.Transmission = input.Transmission!.Value;
             carListing.FuelType = input.FuelType!.Value;
             carListing.BodyShape = input.BodyShape!.Value;
