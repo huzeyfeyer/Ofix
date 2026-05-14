@@ -254,8 +254,30 @@ $(function () {
         loadListings();
     });
 
+    var urlParams = new URLSearchParams(window.location.search);
+
     loadBrands().then(function () {
-        loadListings();
+        var paramBrandId = urlParams.get('BrandId');
+        if (!paramBrandId) {
+            return loadListings();
+        }
+
+        $brand.val(paramBrandId);
+        return loadModelsByBrandId(paramBrandId).then(function () {
+            var paramModelId = urlParams.get('ModelId');
+            if (!paramModelId) {
+                return loadListings();
+            }
+
+            $model.val(paramModelId);
+            return loadSubModelsByModelId(paramModelId).then(function () {
+                var paramSubModelId = urlParams.get('SubModelId');
+                if (paramSubModelId) {
+                    $subModel.val(paramSubModelId);
+                }
+                return loadListings();
+            });
+        });
     }).catch(function () {
         setStateMessage(l('Marketplace:LoadFailed'), true);
     });

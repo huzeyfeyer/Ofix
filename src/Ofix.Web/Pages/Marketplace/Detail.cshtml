@@ -7,9 +7,10 @@
 @inject IPageLayout PageLayout
 @inject IHtmlLocalizer<OfixResource> L
 @{
-    PageLayout.Content.Title = Model.Listing.Title;
-    PageLayout.Content.BreadCrumb.ShowCurrent = true;
+    PageLayout.Content.Title = string.Empty;
+    PageLayout.Content.BreadCrumb.ShowCurrent = false;
     PageLayout.Content.MenuItemName = "Ofix.Marketplace";
+
     var fotoLijst = Model.Listing.Images.OrderBy(x => x.SortOrder).ToList();
 }
 
@@ -23,9 +24,23 @@
 }
 
 <div class="container py-3 marketplace-detail">
-    <div class="mb-3">
-        <a class="btn btn-outline-secondary btn-sm" href="@Url.Page("/Marketplace/Index")">@L["Marketplace:BackToMarketplace"]</a>
-    </div>
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="/Marketplace">@L["Menu:Marketplace"]</a></li>
+            @if (!string.IsNullOrWhiteSpace(Model.Listing.BrandName))
+            {
+                <li class="breadcrumb-item"><a href="/Marketplace?BrandId=@Model.Listing.BrandId">@Model.Listing.BrandName</a></li>
+            }
+            @if (!string.IsNullOrWhiteSpace(Model.Listing.ModelName))
+            {
+                <li class="breadcrumb-item"><a href="/Marketplace?BrandId=@Model.Listing.BrandId&ModelId=@Model.Listing.ModelId">@Model.Listing.ModelName</a></li>
+            }
+            @if (!string.IsNullOrWhiteSpace(Model.Listing.SubModelName))
+            {
+                <li class="breadcrumb-item active" aria-current="page">@Model.Listing.SubModelName</li>
+            }
+        </ol>
+    </nav>
 
     <div class="row g-4">
         <div class="col-12 col-lg-7">
@@ -110,7 +125,19 @@
 
         <div class="col-12 col-lg-5">
             <h1 class="h3 fw-bold mb-2">@Model.Listing.Title</h1>
-            <p class="fs-3 fw-bold mb-3">€ @Model.Listing.Price.ToString("N0")</p>
+            <p class="fs-3 fw-bold text-success mb-1">€ @Model.Listing.Price.ToString("N0")</p>
+
+            <div class="d-flex flex-wrap gap-2 align-items-center text-muted small mb-3">
+                <span>
+                    <i class="fa fa-calendar-alt me-1"></i>
+                    @L["Marketplace:PublishedOn"] @Model.Listing.CreationTime.ToString("dd MMM yyyy")
+                </span>
+                <span class="text-muted">|</span>
+                <span>
+                    <i class="fa fa-hashtag me-1"></i>
+                    @L["Marketplace:ListingNumber"] @Model.Listing.Id.ToString("N")[..8].ToUpper()
+                </span>
+            </div>
 
             <dl class="row small mb-0">
                 @if (!string.IsNullOrWhiteSpace(Model.Listing.BrandName))
@@ -131,7 +158,7 @@
                 <dt class="col-5 text-muted">@L["Year"]</dt>
                 <dd class="col-7">@Model.Listing.Year</dd>
                 <dt class="col-5 text-muted">@L["Mileage"]</dt>
-                <dd class="col-7">@Model.Listing.Mileage km</dd>
+                <dd class="col-7">@Model.Listing.Mileage.ToString("N0") km</dd>
                 <dt class="col-5 text-muted">@L["FuelType"]</dt>
                 <dd class="col-7">@L["Enum:FuelType:" + Model.Listing.FuelType]</dd>
                 <dt class="col-5 text-muted">@L["Transmission"]</dt>
@@ -139,6 +166,39 @@
                 <dt class="col-5 text-muted">@L["BodyShape"]</dt>
                 <dd class="col-7">@L["Enum:BodyShapeType:" + Model.Listing.BodyShape]</dd>
             </dl>
+
+            <hr />
+
+            <div class="d-grid gap-2 mb-3">
+                <button type="button" class="btn btn-success btn-lg" id="BodUitbrengenBtn">
+                    <i class="fa fa-gavel me-2"></i>@L["Marketplace:MakeOffer"]
+                </button>
+                <button type="button" class="btn btn-outline-primary" id="AfspraakMakenBtn">
+                    <i class="fa fa-calendar-check me-2"></i>@L["Marketplace:BookAppointment"]
+                </button>
+            </div>
+
+            <div class="card border">
+                <div class="card-body">
+                    <h6 class="card-title fw-bold mb-3">
+                        <i class="fa fa-user me-2"></i>@L["Marketplace:ContactSeller"]
+                    </h6>
+                    <div class="d-flex flex-wrap gap-2">
+                        <button type="button" class="btn btn-outline-secondary btn-sm verkoper-contact-btn" data-actie="telefoon">
+                            <i class="fa fa-phone me-1"></i>@L["Marketplace:Phone"]
+                        </button>
+                        <button type="button" class="btn btn-outline-success btn-sm verkoper-contact-btn" data-actie="whatsapp">
+                            <i class="fab fa-whatsapp me-1"></i>@L["Marketplace:WhatsApp"]
+                        </button>
+                        <button type="button" class="btn btn-outline-info btn-sm verkoper-contact-btn" data-actie="email">
+                            <i class="fa fa-envelope me-1"></i>@L["Marketplace:Email"]
+                        </button>
+                        <button type="button" class="btn btn-primary btn-sm verkoper-contact-btn" data-actie="bericht">
+                            <i class="fa fa-comment-dots me-1"></i>@L["Marketplace:SendMessage"]
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="col-12">

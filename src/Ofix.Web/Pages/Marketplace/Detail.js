@@ -53,6 +53,39 @@ $(function () {
         }
     });
 
+    $(document).on('keydown', function (e) {
+        var carouselEl = $carousel[0];
+        if (!carouselEl) {
+            return;
+        }
+        var instance = bootstrap.Carousel.getOrCreateInstance(carouselEl);
+
+        if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            instance.prev();
+        } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            instance.next();
+        } else if (e.key === 'Escape' && document.fullscreenElement) {
+            e.preventDefault();
+            document.exitFullscreen().catch(function () { });
+        }
+    });
+
     zetTeller(0);
     zetActieveDuim(0);
+
+    var l = abp.localization.getResource('Ofix');
+
+    $('#BodUitbrengenBtn').on('click', function () {
+        abp.message.info(l('Marketplace:OfferComingSoon'));
+    });
+
+    $('#AfspraakMakenBtn').on('click', function () {
+        abp.message.info(l('Marketplace:AppointmentComingSoon'));
+    });
+
+    $('.verkoper-contact-btn').on('click', function () {
+        abp.message.info(l('Marketplace:MessageComingSoon'));
+    });
 });

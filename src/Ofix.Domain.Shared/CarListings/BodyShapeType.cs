@@ -10,6 +10,9 @@ namespace Ofix.CarListings
         Hatchback = 1,
         SUV = 2,
         Coupe = 3,
-        Wagon = 4
+        Wagon = 4,
+        ShootingBrake = 5,
+        Cabriolet = 6,
+        MPV = 7
     }
 }
