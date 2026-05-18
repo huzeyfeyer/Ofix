@@ -156,6 +156,19 @@
         </div>
 
         <div class="col-12 col-lg-9">
+        <div class="d-flex justify-content-end align-items-center mb-3 marketplace-sort-row">
+            <label class="form-label mb-0 me-2 small text-muted" for="SortBy">@L["Marketplace:SortBy"]</label>
+            <select id="SortBy" class="form-select form-select-sm marketplace-sort-select">
+                <option value="creationTime DESC">@L["Marketplace:SortNewest"]</option>
+                <option value="creationTime ASC">@L["Marketplace:SortOldest"]</option>
+                <option value="price ASC">@L["Marketplace:SortPriceLowHigh"]</option>
+                <option value="price DESC">@L["Marketplace:SortPriceHighLow"]</option>
+                <option value="year DESC">@L["Marketplace:SortYearNewest"]</option>
+                <option value="year ASC">@L["Marketplace:SortYearOldest"]</option>
+                <option value="mileage ASC">@L["Marketplace:SortMileageLowHigh"]</option>
+                <option value="mileage DESC">@L["Marketplace:SortMileageHighLow"]</option>
+            </select>
+        </div>
         <div id="MarketplaceStateMessage" class="alert alert-light d-none" role="status"></div>
         <div id="MarketplaceCards"
              class="row g-3"

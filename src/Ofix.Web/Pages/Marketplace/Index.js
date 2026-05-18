@@ -4,6 +4,7 @@ $(function () {
     var currentPage = 1;
     var pageSize = 9;
     var totalCount = 0;
+    var standaardSortering = 'creationTime DESC';
 
     var $brand = $('#BrandId');
     var $model = $('#ModelId');
@@ -18,6 +19,7 @@ $(function () {
     var $fuelType = $('#FuelType');
     var $transmission = $('#Transmission');
     var $bodyShape = $('#BodyShape');
+    var $sortBy = $('#SortBy');
     var $cards = $('#MarketplaceCards');
     var $state = $('#MarketplaceStateMessage');
     var $pageInfo = $('#MarketplacePageInfo');
@@ -73,7 +75,7 @@ $(function () {
         var url = new URL(cardsUrl, window.location.href);
         url.searchParams.set('skipCount', String((currentPage - 1) * pageSize));
         url.searchParams.set('maxResultCount', String(pageSize));
-        url.searchParams.set('sorting', 'creationTime DESC');
+        url.searchParams.set('sorting', $sortBy.val() || standaardSortering);
 
         var title = $searchTitle.val();
         if (title) {
@@ -205,6 +207,11 @@ $(function () {
         loadSubModelsByModelId($model.val());
     });
 
+    $sortBy.on('change', function () {
+        currentPage = 1;
+        loadListings();
+    });
+
     $('#ApplyFiltersButton').on('click', function () {
         currentPage = 1;
         loadListings();
@@ -232,6 +239,7 @@ $(function () {
         $fuelType.val('');
         $transmission.val('');
         $bodyShape.val('');
+        $sortBy.val(standaardSortering);
         loadListings();
     });
 
