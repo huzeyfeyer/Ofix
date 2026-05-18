@@ -23,6 +23,7 @@ public class OfixMenuContributor : IMenuContributor
     {
         var l = context.GetLocalizer<OfixResource>();
 
+        /*
         //Home
         context.Menu.AddItem(
             new ApplicationMenuItem(
@@ -33,6 +34,8 @@ public class OfixMenuContributor : IMenuContributor
                 order: 1
             )
         );
+
+        */
 
         context.Menu.AddItem(
             new ApplicationMenuItem(
