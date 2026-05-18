@@ -23,7 +23,7 @@ public class OfixMenuContributor : IMenuContributor
     {
         var l = context.GetLocalizer<OfixResource>();
 
-        /*
+        
         //Home
         context.Menu.AddItem(
             new ApplicationMenuItem(
@@ -35,7 +35,7 @@ public class OfixMenuContributor : IMenuContributor
             )
         );
 
-        */
+        
 
         context.Menu.AddItem(
             new ApplicationMenuItem(
@@ -61,17 +61,6 @@ public class OfixMenuContributor : IMenuContributor
         administration.SetSubItemOrder(SettingManagementMenuNames.GroupName, 8);
     
         context.Menu.AddItem(
-            new ApplicationMenuItem(
-                "BooksStore",
-                l["Menu:Ofix"],
-                icon: "fa fa-book"
-            ).AddItem(
-            new ApplicationMenuItem(
-                "BooksStore.Books",
-                l["Menu:Books"],
-                url: "/Books"
-                ).RequirePermissions(OfixPermissions.Books.Default) 
-            ).AddItem(
                 new ApplicationMenuItem(
                     "Ofix.Brands",
                     l["Menu:Brands"],
