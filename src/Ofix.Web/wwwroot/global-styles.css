@@ -1,0 +1,33 @@
+/* Admin layout: donkerblauw */
+body.ofix-layout-admin {
+    --ofix-navbar-bg: #2c3e50;
+    --ofix-navbar-border: #1a252f;
+    --ofix-footer-bg: #1a252f;
+    --ofix-page-bg: #eef1f4;
+}
+
+/* Gebruiker layout: groen (marktplaats) */
+body.ofix-layout-gebruiker {
+    --ofix-navbar-bg: #157347;
+    --ofix-navbar-border: #0f5132;
+    --ofix-footer-bg: #0f5132;
+    --ofix-page-bg: #f8f9fa;
+}
+
+body.ofix-layout-admin,
+body.ofix-layout-gebruiker {
+    background-color: var(--ofix-page-bg);
+}
+
+body.ofix-layout-admin .navbar,
+body.ofix-layout-gebruiker .navbar {
+    background-color: var(--ofix-navbar-bg) !important;
+    border-bottom: 3px solid var(--ofix-navbar-border);
+}
+
+body.ofix-layout-admin .ofix-site-footer,
+body.ofix-layout-gebruiker .ofix-site-footer {
+    background-color: var(--ofix-footer-bg);
+    color: rgba(255, 255, 255, 0.85);
+    margin-top: 1.5rem;
+}

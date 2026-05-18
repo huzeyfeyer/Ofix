@@ -61,30 +61,35 @@ public class OfixMenuContributor : IMenuContributor
         administration.SetSubItemOrder(SettingManagementMenuNames.GroupName, 8);
     
         context.Menu.AddItem(
-                new ApplicationMenuItem(
-                    "Ofix.Brands",
-                    l["Menu:Brands"],
-                    url: "/Brands"
-                ).RequirePermissions(OfixPermissions.Brands.Default)
-                ).AddItem(
+            new ApplicationMenuItem(
+                "Ofix.Brands",
+                l["Menu:Brands"],
+                url: "/Brands"
+            ).RequirePermissions(OfixPermissions.Brands.Default)
+        );
+
+        context.Menu.AddItem(
             new ApplicationMenuItem(
                 "Ofix.Models",
                 l["Menu:Models"],
                 url: "/Models"
-                ).RequirePermissions(OfixPermissions.Models.Default)
-            ).AddItem(
+            ).RequirePermissions(OfixPermissions.Models.Default)
+        );
+
+        context.Menu.AddItem(
             new ApplicationMenuItem(
                 "Ofix.SubModels",
                 l["Menu:SubModels"],
                 url: "/SubModels"
-                ).RequirePermissions(OfixPermissions.SubModels.Default)
-            ).AddItem(
+            ).RequirePermissions(OfixPermissions.SubModels.Default)
+        );
+
+        context.Menu.AddItem(
             new ApplicationMenuItem(
                 "Ofix.CarListings",
                 l["Menu:CarListings"],
                 url: "/CarListings"
-                ).RequirePermissions(OfixPermissions.CarListings.Default)
-            )
+            ).RequirePermissions(OfixPermissions.CarListings.Default)
         );
 
 

@@ -10,6 +10,7 @@ using Ofix.EntityFrameworkCore;
 using Ofix.Localization;
 using Ofix.MultiTenancy;
 using Ofix.Permissions;
+using Ofix.Web.Components.Layout;
 using Ofix.Web.Menus;
 using Ofix.Web.HealthChecks;
 using Microsoft.OpenApi;
@@ -41,7 +42,9 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Extensions.DependencyInjection;
 using Volo.Abp.Account.Web;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
+using Volo.Abp.AspNetCore.Mvc.UI.Components.LayoutHook;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Toolbars;
+using Volo.Abp.Ui.LayoutHooks;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Identity;
 using Volo.Abp.Swashbuckle;
@@ -162,6 +165,7 @@ public class OfixWebModule : AbpModule
         ConfigureAuthentication(context);
         ConfigureVirtualFileSystem(hostingEnvironment);
         ConfigureNavigationServices();
+        ConfigureLayoutHooks();
         ConfigureAutoApiControllers();
         ConfigureSwaggerServices(context.Services);
 
@@ -276,6 +280,22 @@ public class OfixWebModule : AbpModule
         Configure<AbpToolbarOptions>(options =>
         {
             options.Contributors.Add(new OfixToolbarContributor());
+        });
+    }
+
+    private void ConfigureLayoutHooks()
+    {
+        Configure<AbpLayoutHookOptions>(options =>
+        {
+            options.Add(
+                LayoutHooks.Body.First,
+                typeof(OfixLayoutStijlViewComponent)
+            );
+
+            options.Add(
+                LayoutHooks.Body.Last,
+                typeof(OfixSiteFooterViewComponent)
+            );
         });
     }
 
