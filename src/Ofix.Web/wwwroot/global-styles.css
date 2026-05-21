@@ -25,6 +25,24 @@ body.ofix-layout-gebruiker .navbar {
     border-bottom: 3px solid var(--ofix-navbar-border);
 }
 
+.navbar-brand img {
+    max-height: 36px;
+    width: auto;
+}
+
+.navbar-brand {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}
+
+.navbar-brand:has(img) {
+    font-size: 0;
+}
+
+.navbar-brand:has(img) img {
+    font-size: initial;
+}
+
 body.ofix-layout-admin .ofix-site-footer,
 body.ofix-layout-gebruiker .ofix-site-footer {
     background-color: var(--ofix-footer-bg);

@@ -41,13 +41,29 @@ $(function () {
         instance.to(Number(positie));
     });
 
+    var galleryRoot = document.getElementById('CarDetailGalleryRoot');
+
+    var $fullscreenBtn = $('#CarDetailGalleryFullscreenBtn');
+
+    function syncFullscreenClass() {
+        if (!galleryRoot) {
+            return;
+        }
+        var isOpen = document.fullscreenElement === galleryRoot;
+        galleryRoot.classList.toggle('is-gallery-fullscreen', isOpen);
+        $fullscreenBtn.find('.fa')
+            .toggleClass('fa-expand', !isOpen)
+            .toggleClass('fa-compress', isOpen);
+    }
+
+    document.addEventListener('fullscreenchange', syncFullscreenClass);
+
     $('#CarDetailGalleryFullscreenBtn').on('click', function () {
-        var root = document.getElementById('CarDetailGalleryRoot');
-        if (!root) {
+        if (!galleryRoot) {
             return;
         }
         if (!document.fullscreenElement) {
-            root.requestFullscreen().catch(function () { });
+            galleryRoot.requestFullscreen().catch(function () { });
         } else {
             document.exitFullscreen().catch(function () { });
         }

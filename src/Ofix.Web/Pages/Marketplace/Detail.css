@@ -1,4 +1,4 @@
-/* Publieke detail: fotogalerij (hoofdbeeld + thumbnails, geen FilePond) */
+/* Marktplaats detail: fotogalerij */
 .car-detail-gallery {
     background-color: var(--bs-dark);
 }
@@ -12,6 +12,65 @@
     max-height: min(70vh, 520px);
     object-fit: contain;
     object-position: center;
+}
+
+/* Volledig scherm */
+.car-detail-gallery:fullscreen,
+.car-detail-gallery:-webkit-full-screen,
+.car-detail-gallery.is-gallery-fullscreen {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    border: none;
+    border-radius: 0;
+}
+
+.car-detail-gallery:fullscreen #CarDetailCarousel,
+.car-detail-gallery:-webkit-full-screen #CarDetailCarousel,
+.car-detail-gallery.is-gallery-fullscreen #CarDetailCarousel {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.car-detail-gallery:fullscreen .carousel-inner,
+.car-detail-gallery:-webkit-full-screen .carousel-inner,
+.car-detail-gallery.is-gallery-fullscreen .carousel-inner {
+    flex: 1 1 auto;
+    height: auto;
+    min-height: 0;
+}
+
+.car-detail-gallery:fullscreen .carousel-item,
+.car-detail-gallery:-webkit-full-screen .carousel-item,
+.car-detail-gallery.is-gallery-fullscreen .carousel-item {
+    height: 100%;
+}
+
+.car-detail-gallery:fullscreen .carousel-item.active,
+.car-detail-gallery:-webkit-full-screen .carousel-item.active,
+.car-detail-gallery.is-gallery-fullscreen .carousel-item.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.car-detail-gallery:fullscreen .car-detail-gallery__main,
+.car-detail-gallery:-webkit-full-screen .car-detail-gallery__main,
+.car-detail-gallery.is-gallery-fullscreen .car-detail-gallery__main {
+    max-height: none;
+    height: 100%;
+    width: 100%;
+    flex: 1 1 auto;
+}
+
+.car-detail-gallery:fullscreen .car-detail-gallery__thumbs-track,
+.car-detail-gallery:-webkit-full-screen .car-detail-gallery__thumbs-track,
+.car-detail-gallery.is-gallery-fullscreen .car-detail-gallery__thumbs-track {
+    flex: 0 0 auto;
 }
 
 .car-detail-gallery__counter {

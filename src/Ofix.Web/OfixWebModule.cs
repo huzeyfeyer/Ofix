@@ -288,6 +288,11 @@ public class OfixWebModule : AbpModule
         Configure<AbpLayoutHookOptions>(options =>
         {
             options.Add(
+                LayoutHooks.Head.First,
+                typeof(OfixBrandingHeadViewComponent)
+            );
+
+            options.Add(
                 LayoutHooks.Body.First,
                 typeof(OfixLayoutStijlViewComponent)
             );
