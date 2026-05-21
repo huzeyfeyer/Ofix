@@ -1,0 +1,27 @@
+@model IReadOnlyList<Ofix.Web.Pages.Index.HomeBrandItemViewModel>
+
+@if (Model.Count > 0)
+{
+    <section class="ofix-home-brands mb-4" aria-label="Brands">
+        <div class="ofix-home-brands-scroll d-flex gap-3 pb-2">
+            @foreach (var brand in Model)
+            {
+                <a class="ofix-home-brand-item text-decoration-none text-center flex-shrink-0"
+                   href="/Marketplace?BrandId=@brand.Id"
+                   title="@brand.Name">
+                    <div class="ofix-home-brand-circle">
+                        @if (!string.IsNullOrWhiteSpace(brand.LogoUrl))
+                        {
+                            <img src="@brand.LogoUrl" alt="@brand.Name" class="ofix-home-brand-logo" />
+                        }
+                        else
+                        {
+                            <span class="ofix-home-brand-initials">@brand.Initials</span>
+                        }
+                    </div>
+                    <span class="ofix-home-brand-name small text-muted d-block mt-2">@brand.Name</span>
+                </a>
+            }
+        </div>
+    </section>
+}

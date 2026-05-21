@@ -214,6 +214,30 @@
     "IsActive": "Aktif",
     "Active": "Aktif",
     "Passive": "Pasif",
-    "SuccessfullySaved": "Başarıyla kaydedildi!"
+    "SuccessfullySaved": "Başarıyla kaydedildi!",
+
+    "Home:Intro": "Ofix ile ikinci el ve yeni araç ilanlarını keşfedin.",
+    "Home:TabCars": "Otomobil",
+    "Home:SearchResults": "{0} sonuç",
+    "Home:AdvancedSearch": "Gelişmiş arama",
+    "Home:LastSearchTitle": "Son arama",
+    "Home:OpenOnMarketplace": "Pazarda aç",
+    "Home:RecentListings": "Son eklenenler",
+    "Home:ViewAll": "Tümünü gör",
+    "Home:ContentSearchTitle": "İdeal aracınızı bulun",
+    "Home:ContentSearchText": "Marka, model, model yılı ve bütçeye göre filtreleyin. Binlerce araç, anında aranabilir.",
+    "Home:ContentSearchCta": "Pazara git",
+    "Home:ContentOfixListingsTitle": "Yalnızca onaylı ilanlar",
+    "Home:ContentOfixListingsText": "Her araç ekibimiz tarafından kişisel olarak kontrol edilir ve yayınlanır. Dolandırıcılık yok, sürpriz yok.",
+    "Home:ContentTrustTitle": "Her şey tek sayfada",
+    "Home:ContentTrustText": "Fotoğraflar, teknik özellikler, kilometre ve iletişim bilgileri — detay sayfasında düzenli şekilde.",
+    "Home:ContentTrustCta": "İlanları incele",
+    "Home:WhyOfixTitle": "Neden Ofix?",
+    "Home:WhyFeature1Title": "Akıllı arama",
+    "Home:WhyFeature1Text": "Marka, model, fiyat ve model yılına saniyeler içinde filtreleyin.",
+    "Home:WhyFeature2Title": "Kontrollü ilanlar",
+    "Home:WhyFeature2Text": "Yalnızca Ofix tarafından yayınlanan ve yönetilen araçlar.",
+    "Home:WhyFeature3Title": "Zengin detay sayfaları",
+    "Home:WhyFeature3Text": "İhtiyacınız olan tüm bilgiler, tek düzenli sayfada."
   }
 }

@@ -1,0 +1,31 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Ofix.Localization
+@inject IHtmlLocalizer<OfixResource> L
+
+<section class="ofix-home-content-rows mb-5">
+    <div class="row g-3">
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm text-center p-4">
+                <i class="fa fa-search fa-2x text-success mb-3"></i>
+                <h3 class="h6 fw-bold">@L["Home:ContentSearchTitle"]</h3>
+                <p class="text-muted small mb-3">@L["Home:ContentSearchText"]</p>
+                <a href="/Marketplace" class="btn btn-success btn-sm">@L["Home:ContentSearchCta"]</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm text-center p-4">
+                <i class="fa fa-shield fa-2x text-success mb-3"></i>
+                <h3 class="h6 fw-bold">@L["Home:ContentOfixListingsTitle"]</h3>
+                <p class="text-muted small mb-0">@L["Home:ContentOfixListingsText"]</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm text-center p-4">
+                <i class="fa fa-info-circle fa-2x text-success mb-3"></i>
+                <h3 class="h6 fw-bold">@L["Home:ContentTrustTitle"]</h3>
+                <p class="text-muted small mb-3">@L["Home:ContentTrustText"]</p>
+                <a href="/Marketplace" class="btn btn-outline-success btn-sm">@L["Home:ContentTrustCta"]</a>
+            </div>
+        </div>
+    </div>
+</section>

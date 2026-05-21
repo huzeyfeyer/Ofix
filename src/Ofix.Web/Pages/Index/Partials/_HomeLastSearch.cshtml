@@ -1,0 +1,19 @@
+@model bool
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Ofix.Localization
+@inject IHtmlLocalizer<OfixResource> L
+
+@if (Model)
+{
+    <section id="HomeLastSearchSection" class="ofix-home-last-search alert alert-light border mb-4 d-none">
+        <div class="d-flex flex-wrap align-items-center justify-content-between gap-2">
+            <div>
+                <strong>@L["Home:LastSearchTitle"]</strong>
+                <span id="HomeLastSearchSummary" class="text-muted ms-2"></span>
+            </div>
+            <a id="HomeLastSearchLink" href="/Marketplace" class="btn btn-sm btn-outline-success">
+                @L["Home:OpenOnMarketplace"]
+            </a>
+        </div>
+    </section>
+}

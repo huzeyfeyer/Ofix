@@ -1,0 +1,27 @@
+@model IReadOnlyList<Ofix.Web.Pages.Shared.Cards.VehicleCardViewModel>
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Ofix.Localization
+@inject IHtmlLocalizer<OfixResource> L
+
+<section class="ofix-home-recent mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="h4 mb-0">@L["Home:RecentListings"]</h2>
+        <a href="/Marketplace" class="btn btn-sm btn-outline-success">@L["Home:ViewAll"]</a>
+    </div>
+
+    @if (Model.Count == 0)
+    {
+        <p class="text-muted">@L["Marketplace:NoResults"]</p>
+    }
+    else
+    {
+        <div class="row g-3">
+            @foreach (var card in Model)
+            {
+                <div class="col-12 col-md-6 col-xl-3">
+                    <partial name="~/Pages/Shared/Cards/_VehicleCard.cshtml" model="card" />
+                </div>
+            }
+        </div>
+    }
+</section>

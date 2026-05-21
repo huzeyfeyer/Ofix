@@ -1,0 +1,30 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Ofix.Localization
+@inject IHtmlLocalizer<OfixResource> L
+
+<section class="ofix-home-why mb-4">
+    <h2 class="h4 text-center mb-4">@L["Home:WhyOfixTitle"]</h2>
+    <div class="row g-3">
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm text-center p-4">
+                <i class="fa fa-sliders fa-2x text-success mb-3"></i>
+                <h3 class="h6">@L["Home:WhyFeature1Title"]</h3>
+                <p class="text-muted small mb-0">@L["Home:WhyFeature1Text"]</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm text-center p-4">
+                <i class="fa fa-check-circle fa-2x text-success mb-3"></i>
+                <h3 class="h6">@L["Home:WhyFeature2Title"]</h3>
+                <p class="text-muted small mb-0">@L["Home:WhyFeature2Text"]</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm text-center p-4">
+                <i class="fa fa-file-text-o fa-2x text-success mb-3"></i>
+                <h3 class="h6">@L["Home:WhyFeature3Title"]</h3>
+                <p class="text-muted small mb-0">@L["Home:WhyFeature3Text"]</p>
+            </div>
+        </div>
+    </div>
+</section>

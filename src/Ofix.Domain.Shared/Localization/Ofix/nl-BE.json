@@ -237,6 +237,30 @@
     "IsActive": "Actief",
     "Active": "Actief",
     "Passive": "Passief",
-    "SuccessfullySaved": "Succesvol opgeslagen!"
+    "SuccessfullySaved": "Succesvol opgeslagen!",
+
+    "Home:Intro": "Ontdek tweedehands en nieuwe auto-advertenties met Ofix.",
+    "Home:TabCars": "Auto's",
+    "Home:SearchResults": "{0} resultaten",
+    "Home:AdvancedSearch": "Uitgebreid zoeken",
+    "Home:LastSearchTitle": "Laatste zoekopdracht",
+    "Home:OpenOnMarketplace": "Open op marktplaats",
+    "Home:RecentListings": "Recent toegevoegd",
+    "Home:ViewAll": "Alles bekijken",
+    "Home:ContentSearchTitle": "Vind jouw ideale auto",
+    "Home:ContentSearchText": "Filter op merk, model, bouwjaar en budget. Duizenden voertuigen, direct doorzoekbaar.",
+    "Home:ContentSearchCta": "Naar de marktplaats",
+    "Home:ContentOfixListingsTitle": "Alleen gecureerde advertenties",
+    "Home:ContentOfixListingsText": "Elk voertuig wordt persoonlijk gecontroleerd en gepubliceerd door ons team. Geen oplichters, geen verrassingen.",
+    "Home:ContentTrustTitle": "Alles op één pagina",
+    "Home:ContentTrustText": "Foto's, technische specs, kilometerstand en contactinfo — overzichtelijk op de detailpagina.",
+    "Home:ContentTrustCta": "Bekijk advertenties",
+    "Home:WhyOfixTitle": "Waarom Ofix?",
+    "Home:WhyFeature1Title": "Slim zoeken",
+    "Home:WhyFeature1Text": "Filter in seconden op merk, model, prijs en bouwjaar.",
+    "Home:WhyFeature2Title": "Gecontroleerde advertenties",
+    "Home:WhyFeature2Text": "Uitsluitend voertuigen gepubliceerd en beheerd door Ofix.",
+    "Home:WhyFeature3Title": "Rijke detailpagina's",
+    "Home:WhyFeature3Text": "Alle info die je nodig hebt, op één overzichtelijke plek."
   }
 }

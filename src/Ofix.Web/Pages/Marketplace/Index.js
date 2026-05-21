@@ -264,7 +264,25 @@ $(function () {
 
     var urlParams = new URLSearchParams(window.location.search);
 
+    function applyFilterFromUrl() {
+        var paramMinYear = urlParams.get('minYear');
+        var paramMaxPrice = urlParams.get('maxPrice');
+        var paramBodyShape = urlParams.get('bodyShape');
+
+        if (paramMinYear) {
+            $minYear.val(paramMinYear);
+        }
+        if (paramMaxPrice) {
+            $maxPrice.val(paramMaxPrice);
+        }
+        if (paramBodyShape) {
+            $bodyShape.val(paramBodyShape);
+        }
+    }
+
     loadBrands().then(function () {
+        applyFilterFromUrl();
+
         var paramBrandId = urlParams.get('BrandId');
         if (!paramBrandId) {
             return loadListings();
