@@ -261,6 +261,27 @@
     "Home:WhyFeature2Title": "Gecontroleerde advertenties",
     "Home:WhyFeature2Text": "Uitsluitend voertuigen gepubliceerd en beheerd door Ofix.",
     "Home:WhyFeature3Title": "Rijke detailpagina's",
-    "Home:WhyFeature3Text": "Alle info die je nodig hebt, op één overzichtelijke plek."
+    "Home:WhyFeature3Text": "Alle info die je nodig hebt, op één overzichtelijke plek.",
+
+    "Footer:QuickLinksTitle": "Snelle links",
+    "Footer:ContactTitle": "Contact",
+    "Footer:SocialTitle": "Sociale media",
+    "Footer:PrivacyPolicy": "Privacybeleid",
+    "Footer:TermsOfUse": "Gebruiksvoorwaarden",
+    "Footer:AllRightsReserved": "Alle rechten voorbehouden",
+    "Footer:MoreContact": "Meer contactinfo",
+    "Footer:ComingSoon": "Binnenkort beschikbaar",
+    "Footer:SocialFacebook": "Facebook",
+    "Footer:SocialInstagram": "Instagram",
+    "Footer:SocialX": "X (Twitter)",
+    "Footer:SocialYouTube": "YouTube",
+
+    "Contact:Title": "Contact",
+    "Contact:Intro": "Heb je een vraag over een voertuig of onze marktplaats? Neem contact met ons op.",
+    "Contact:Address": "Excelsiorlaan 31, 1930 Zaventem, België",
+    "Contact:Phone": "Telefoon",
+    "Contact:Website": "Website",
+    "Contact:GetDirections": "Route plannen",
+    "Contact:MapTitle": "Kaart: Ofix Zaventem"
   }
 }

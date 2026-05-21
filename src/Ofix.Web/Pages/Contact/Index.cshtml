@@ -1,0 +1,63 @@
+@page "/Contact"
+@using Ofix.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout
+@using Microsoft.AspNetCore.Mvc.Localization
+@model Ofix.Web.Pages.Contact.IndexModel
+@inject IPageLayout PageLayout
+@inject IHtmlLocalizer<OfixResource> L
+@{
+    PageLayout.Content.Title = L["Contact:Title"].Value;
+    PageLayout.Content.BreadCrumb.ShowCurrent = true;
+    PageLayout.Content.MenuItemName = "Ofix.Contact";
+}
+
+@section styles {
+    <abp-style src="/Pages/Contact/Index.css" />
+}
+
+<div class="container py-4 ofix-contact-page">
+    <p class="lead text-muted mb-4">@L["Contact:Intro"]</p>
+
+    <div class="row g-4">
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+                    <h2 class="h5 mb-4">@L["Footer:ContactTitle"]</h2>
+
+                    <div class="ofix-contact-item mb-3">
+                        <i class="fa fa-map-marker text-success me-2" aria-hidden="true"></i>
+                        <span>@L["Contact:Address"]</span>
+                    </div>
+
+                    <div class="ofix-contact-item mb-3">
+                        <i class="fa fa-phone text-success me-2" aria-hidden="true"></i>
+                        <a href="tel:+3224116996" class="text-decoration-none">02 411 69 96</a>
+                    </div>
+
+                    <div class="ofix-contact-item mb-4">
+                        <i class="fa fa-globe text-success me-2" aria-hidden="true"></i>
+                        <a href="https://ofix.be" target="_blank" rel="noopener noreferrer" class="text-decoration-none">ofix.be</a>
+                    </div>
+
+                    <a href="@Model.MapsDirectionsUrl" target="_blank" rel="noopener noreferrer" class="btn btn-success">
+                        <i class="fa fa-map-signs me-1" aria-hidden="true"></i>
+                        @L["Contact:GetDirections"]
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm h-100 ofix-contact-map-card">
+                <div class="card-body p-0">
+                    <iframe class="ofix-contact-map"
+                            title="@L["Contact:MapTitle"]"
+                            src="https://maps.google.com/maps?q=Excelsiorlaan+31,+1930+Zaventem&amp;output=embed"
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

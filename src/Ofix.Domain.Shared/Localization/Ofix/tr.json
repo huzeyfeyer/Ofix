@@ -238,6 +238,27 @@
     "Home:WhyFeature2Title": "Kontrollü ilanlar",
     "Home:WhyFeature2Text": "Yalnızca Ofix tarafından yayınlanan ve yönetilen araçlar.",
     "Home:WhyFeature3Title": "Zengin detay sayfaları",
-    "Home:WhyFeature3Text": "İhtiyacınız olan tüm bilgiler, tek düzenli sayfada."
+    "Home:WhyFeature3Text": "İhtiyacınız olan tüm bilgiler, tek düzenli sayfada.",
+
+    "Footer:QuickLinksTitle": "Hızlı linkler",
+    "Footer:ContactTitle": "İletişim",
+    "Footer:SocialTitle": "Sosyal medya",
+    "Footer:PrivacyPolicy": "Gizlilik politikası",
+    "Footer:TermsOfUse": "Kullanım koşulları",
+    "Footer:AllRightsReserved": "Tüm hakları saklıdır",
+    "Footer:MoreContact": "Daha fazla iletişim bilgisi",
+    "Footer:ComingSoon": "Yakında",
+    "Footer:SocialFacebook": "Facebook",
+    "Footer:SocialInstagram": "Instagram",
+    "Footer:SocialX": "X (Twitter)",
+    "Footer:SocialYouTube": "YouTube",
+
+    "Contact:Title": "İletişim",
+    "Contact:Intro": "Bir araç veya pazarımız hakkında sorunuz mu var? Bize ulaşın.",
+    "Contact:Address": "Excelsiorlaan 31, 1930 Zaventem, Belçika",
+    "Contact:Phone": "Telefon",
+    "Contact:Website": "Web sitesi",
+    "Contact:GetDirections": "Yol tarifi al",
+    "Contact:MapTitle": "Harita: Ofix Zaventem"
   }
 }

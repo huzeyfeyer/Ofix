@@ -1,3 +1,80 @@
-<footer class="ofix-site-footer text-center py-2 small">
-    <span>&copy; @DateTime.Now.Year Ofix</span>
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Ofix.Localization
+@inject IHtmlLocalizer<OfixResource> L
+
+<footer class="ofix-site-footer">
+    <div class="container py-4">
+        <div class="ofix-footer-main row g-4">
+            <div class="col-12 col-md-4">
+                <h3 class="ofix-footer-heading">@L["Footer:QuickLinksTitle"]</h3>
+                <ul class="ofix-footer-links list-unstyled mb-0">
+                    <li><a href="/">@L["Menu:Home"]</a></li>
+                    <li><a href="/Marketplace">@L["Menu:Marketplace"]</a></li>
+                    <li><a href="/Contact">@L["Menu:ContactUs"]</a></li>
+                </ul>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <h3 class="ofix-footer-heading">@L["Footer:ContactTitle"]</h3>
+                <ul class="ofix-footer-contact list-unstyled mb-2">
+                    <li>
+                        <i class="fa fa-map-marker ofix-footer-icon" aria-hidden="true"></i>
+                        <span>@L["Contact:Address"]</span>
+                    </li>
+                    <li>
+                        <i class="fa fa-phone ofix-footer-icon" aria-hidden="true"></i>
+                        <a href="tel:+3224116996">02 411 69 96</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-globe ofix-footer-icon" aria-hidden="true"></i>
+                        <a href="https://ofix.be" target="_blank" rel="noopener noreferrer">ofix.be</a>
+                    </li>
+                </ul>
+                <a href="/Contact" class="ofix-footer-more-link small">@L["Footer:MoreContact"]</a>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <h3 class="ofix-footer-heading">@L["Footer:SocialTitle"]</h3>
+                <div class="ofix-footer-social d-flex gap-2">
+                    <a href="#" class="ofix-footer-social-link ofix-footer-link-disabled"
+                       aria-label="@L["Footer:SocialFacebook"]"
+                       title="@L["Footer:ComingSoon"]">
+                        <i class="fa fa-facebook" aria-hidden="true"></i>
+                    </a>
+                    <a href="#" class="ofix-footer-social-link ofix-footer-link-disabled"
+                       aria-label="@L["Footer:SocialInstagram"]"
+                       title="@L["Footer:ComingSoon"]">
+                        <i class="fa fa-instagram" aria-hidden="true"></i>
+                    </a>
+                    <a href="#" class="ofix-footer-social-link ofix-footer-link-disabled"
+                       aria-label="@L["Footer:SocialX"]"
+                       title="@L["Footer:ComingSoon"]">
+                        <i class="fa fa-twitter" aria-hidden="true"></i>
+                    </a>
+                    <a href="#" class="ofix-footer-social-link ofix-footer-link-disabled"
+                       aria-label="@L["Footer:SocialYouTube"]"
+                       title="@L["Footer:ComingSoon"]">
+                        <i class="fa fa-youtube-play" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="ofix-footer-bottom pt-3 mt-3">
+            <div class="row align-items-center g-2">
+                <div class="col-12 col-md-6 text-center text-md-start">
+                    <span class="ofix-footer-copyright small">
+                        &copy; @DateTime.Now.Year Ofix &middot; @L["Footer:AllRightsReserved"]
+                    </span>
+                </div>
+                <div class="col-12 col-md-6 text-center text-md-end">
+                    <a href="#" class="ofix-footer-legal-link ofix-footer-link-disabled small"
+                       title="@L["Footer:ComingSoon"]">@L["Footer:PrivacyPolicy"]</a>
+                    <span class="ofix-footer-legal-sep mx-2" aria-hidden="true">|</span>
+                    <a href="#" class="ofix-footer-legal-link ofix-footer-link-disabled small"
+                       title="@L["Footer:ComingSoon"]">@L["Footer:TermsOfUse"]</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </footer>

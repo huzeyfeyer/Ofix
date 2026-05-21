@@ -31,3 +31,94 @@ body.ofix-layout-gebruiker .ofix-site-footer {
     color: rgba(255, 255, 255, 0.85);
     margin-top: 1.5rem;
 }
+
+.ofix-footer-heading {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 1rem;
+}
+
+.ofix-footer-links a,
+.ofix-footer-contact a,
+.ofix-footer-more-link {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+}
+
+.ofix-footer-links a:hover,
+.ofix-footer-contact a:hover,
+.ofix-footer-more-link:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.ofix-footer-links li + li {
+    margin-top: 0.5rem;
+}
+
+.ofix-footer-contact li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.ofix-footer-icon {
+    color: rgba(255, 255, 255, 0.65);
+    width: 1rem;
+    margin-top: 0.15rem;
+    flex-shrink: 0;
+}
+
+.ofix-footer-social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.ofix-footer-social-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.45);
+    color: #fff;
+}
+
+.ofix-footer-link-disabled {
+    cursor: default;
+    opacity: 0.75;
+}
+
+.ofix-footer-link-disabled:hover {
+    text-decoration: none;
+}
+
+.ofix-footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.ofix-footer-legal-link {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+}
+
+.ofix-footer-legal-link:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.ofix-footer-legal-sep {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.ofix-footer-copyright {
+    color: rgba(255, 255, 255, 0.75);
+}

@@ -47,6 +47,15 @@ public class OfixMenuContributor : IMenuContributor
             )
         );
 
+        context.Menu.AddItem(
+            new ApplicationMenuItem(
+                "Ofix.Contact",
+                l["Menu:ContactUs"],
+                "~/Contact",
+                icon: "fa fa-envelope",
+                order: 3
+            )
+        );
 
         //Administration
         var administration = context.Menu.GetAdministration();
